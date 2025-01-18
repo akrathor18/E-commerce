@@ -438,10 +438,10 @@ function App() {
   return (
     <>
    
-    {/* <NavBar/> */}
+    <NavBar/>
     <SignUp/>
     <SignIn/>
-    {/* <Products productDetail={productDetail}/> */}
+    <Products productDetail={productDetail}/>
 
     </>
   );
