@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import axios from "axios";
 import './App.css'
 import NavBar from './components/navBar'; 
-import SignUp from './components/signUp';
+import { SignIn } from './components/SignIn';
+import { SignUp } from './components/signUp';
 import Products from './components/products';
 function App() {
 
@@ -437,9 +438,10 @@ function App() {
   return (
     <>
    
-    <NavBar/>
-    {/* <SignUp/> */}
-    <Products productDetail={productDetail}/>
+    {/* <NavBar/> */}
+    <SignUp/>
+    <SignIn/>
+    {/* <Products productDetail={productDetail}/> */}
 
     </>
   );

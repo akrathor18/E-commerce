@@ -418,3 +418,26 @@
       "count": 160
     }
     }
+
+
+ const onSubmit = async (data) => {
+        try {
+            const response = await fetch('http://localhost:3000/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const resp = await response.json();
+            setFormResp(resp)
+            if (resp.status === 201) {
+                setTimeout(() => {
+                    navigate('/sign-in');
+                }, 1500);
+            }
+        } catch (error) {
+            console.error('Error during the fetch:', error);
+        }
+    };
