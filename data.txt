@@ -1,0 +1,469 @@
+  {
+    "id": 1,
+    "title": "Men's Casual T-Shirt",
+    "price": 499,
+    "description": "Comfortable and stylish T-shirt for everyday wear, made from high-quality cotton.",
+    "category": "Clothing",
+    "image": "https://pixabay.com/photos/t-shirt-red-man-plain-model-1710578/",
+    "rating": {
+      "rate": 4.2,
+      "count": 120
+    }
+  },
+  {
+    "id": 2,
+    "title": "Women's Running Shoes",
+    "price": 2999,
+    "description": "Lightweight running shoes with excellent grip and cushioning for long-lasting comfort.",
+    "category": "Footwear",
+    "image": "https://pixabay.com/photos/sneakers-black-athletic-3105120/",
+    "rating": {
+      "rate": 4.5,
+      "count": 200
+    }
+  },
+  {
+    "id": 3,
+    "title": "Wireless Earbuds",
+    "price": 1999,
+    "description": "True wireless earbuds with superior sound quality and long battery life.",
+    "category": "Electronics",
+    "image": "https://pixabay.com/photos/headphones-wireless-apple-airpods-5282687/",
+    "rating": {
+      "rate": 4.7,
+      "count": 350
+    }
+  },
+  {
+    "id": 4,
+    "title": "Ceramic Coffee Mug",
+    "price": 299,
+    "description": "Stylish ceramic mug ideal for coffee, tea, and other beverages.",
+    "category": "Kitchenware",
+    "image": "https://pixabay.com/photos/mug-cup-coffee-drink-tea-beverage-3926033/",
+    "rating": {
+      "rate": 4.3,
+      "count": 95
+    }
+  },
+  {
+    "id": 5,
+    "title": "Adjustable Dumbbells",
+    "price": 2499,
+    "description": "Pair of adjustable dumbbells for strength training and fitness enthusiasts.",
+    "category": "Fitness",
+    "image": "https://pixabay.com/photos/bodybuilding-gym-muscles-dumbbells-5013985/",
+    "rating": {
+      "rate": 4.6,
+      "count": 180
+    }
+  },
+  {
+    "id": 6,
+    "title": "Men's Leather Wallet",
+    "price": 799,
+    "description": "Premium leather wallet with multiple compartments for cards and cash.",
+    "category": "Accessories",
+    "image": "https://pixabay.com/photos/wallet-leather-money-pay-494169/",
+    "rating": {
+      "rate": 4.4,
+      "count": 145
+    }
+  },
+  {
+    "id": 7,
+    "title": "Gaming Mouse",
+    "price": 1499,
+    "description": "High-precision gaming mouse with customizable DPI settings and RGB lighting.",
+    "category": "Gaming",
+    "image": "https://pixabay.com/photos/mouse-wireless-technology-1999471/",
+    "rating": {
+      "rate": 4.8,
+      "count": 400
+    }
+  },
+  {
+    "id": 8,
+    "title": "Cookware Set",
+    "price": 3999,
+    "description": "Non-stick cookware set including frying pan, saucepan, and kadai for versatile cooking.",
+    "category": "Kitchenware",
+    "image": "https://pixabay.com/photos/cookware-kitchen-food-cook-spoon-182788/",
+    "rating": {
+      "rate": 4.5,
+      "count": 250
+    }
+  },
+  {
+    "id": 9,
+    "title": "Yoga Mat",
+    "price": 999,
+    "description": "Eco-friendly yoga mat with excellent grip and cushioning for all types of exercises.",
+    "category": "Fitness",
+    "image": "https://pixabay.com/photos/yoga-mat-lifestyle-balance-manduka-698114/",
+    "rating": {
+      "rate": 4.4,
+      "count": 190
+    }
+  },
+  {
+    "id": 10,
+    "title": "Smartphone Stand",
+    "price": 399,
+    "description": "Adjustable smartphone stand for hands-free video calls and viewing.",
+    "category": "Accessories",
+    "image": "https://m.media-amazon.com/images/I/51u2MqPaQwL._SL1200_.jpg",
+    "rating": {
+      "rate": 4.3,
+      "count": 135
+    }
+  },
+  {
+    "id": 11,
+    "title": "Bluetooth Speaker",
+    "price": 1599,
+    "description": "Portable Bluetooth speaker with high-quality sound and long battery life.",
+    "category": "Electronics",
+    "image": "https://pixabay.com/photos/speakers-bluetooth-tech-speaker-4109274/",
+    "rating": {
+      "rate": 4.6,
+      "count": 320
+    }
+  },
+  {
+    "id": 12,
+    "title": "Men's Hoodie",
+    "price": 999,
+    "description": "Warm and cozy hoodie made from soft fleece material.",
+    "category": "Clothing",
+    "image": "https://example.com/images/hoodie1.jpg",
+    "rating": {
+      "rate": 4.4,
+      "count": 220
+    }
+  },
+  {
+    "id": 13,
+    "title": "Women's Handbag",
+    "price": 1499,
+    "description": "Elegant handbag with spacious compartments for everyday use.",
+    "category": "Accessories",
+    "image": "https://example.com/images/handbag1.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 160
+    }
+  },
+  {
+    "id": 14,
+    "title": "Office Chair",
+    "price": 5999,
+    "description": "Ergonomic office chair with adjustable height and lumbar support.",
+    "category": "Furniture",
+    "image": "https://example.com/images/officechair1.jpg",
+    "rating": {
+      "rate": 4.7,
+      "count": 210
+    }
+  },
+  {
+    "id": 15,
+    "title": "Electric Kettle",
+    "price": 1299,
+    "description": "Compact electric kettle for boiling water quickly and efficiently.",
+    "category": "Kitchenware",
+    "image": "https://example.com/images/kettle1.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 180
+    }
+  },
+  {
+    "id": 16,
+    "title": "Dumbbell Set",
+    "price": 3499,
+    "description": "Set of 2 dumbbells with interchangeable weights for various exercises.",
+    "category": "Fitness",
+    "image": "https://example.com/images/dumbbellset1.jpg",
+    "rating": {
+      "rate": 4.6,
+      "count": 150
+    }
+  },
+  {
+    "id": 17,
+    "title": "Gaming Headset",
+    "price": 1999,
+    "description": "Noise-canceling gaming headset with a built-in microphone for immersive gameplay.",
+    "category": "Gaming",
+    "image": "https://example.com/images/headset1.jpg",
+    "rating": {
+      "rate": 4.7,
+      "count": 270
+    }
+  },
+  {
+    "id": 18,
+    "title": "Study Desk",
+    "price": 4999,
+    "description": "Compact wooden desk ideal for studying or working from home.",
+    "category": "Furniture",
+    "image": "https://example.com/images/studydesk1.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 190
+    }
+  },
+  {
+    "id": 19,
+    "title": "LED Desk Lamp",
+    "price": 799,
+    "description": "Adjustable LED desk lamp with touch controls and brightness settings.",
+    "category": "Accessories",
+    "image": "https://example.com/images/desklamp1.jpg",
+    "rating": {
+      "rate": 4.4,
+      "count": 140
+    }
+  },
+  {
+    "id": 20,
+    "title": "Men's Sports Watch",
+    "price": 2499,
+    "description": "Durable sports watch with water resistance and stopwatch functionality.",
+    "category": "Accessories",
+    "image": "https://example.com/images/sportswatch1.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 165
+    }
+  },
+  {
+    "id": 21,
+    "title": "Wireless Keyboard",
+    "price": 1799,
+    "description": "Compact wireless keyboard with ergonomic design and long battery life.",
+    "category": "Electronics",
+    "image": "https://example.com/images/keyboard1.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 210
+    }
+  },
+  {
+    "id": 22,
+    "title": "Men's Joggers",
+    "price": 899,
+    "description": "Comfortable and stylish joggers for everyday use and workouts.",
+    "category": "Clothing",
+    "image": "https://example.com/images/joggers1.jpg",
+    "rating": {
+      "rate": 4.4,
+      "count": 170
+    }
+  },
+  {
+    "id": 23,
+    "title": "Smartwatch",
+    "price": 3499,
+    "description": "Feature-packed smartwatch with heart rate monitoring and GPS tracking.",
+    "category": "Accessories",
+    "image": "https://example.com/images/smartwatch1.jpg",
+    "rating": {
+      "rate": 4.6,
+      "count": 250
+    }
+  },
+  {
+    "id": 24,
+    "title": "Wall Clock",
+    "price": 599,
+    "description": "Modern wall clock with a silent movement and elegant design.",
+    "category": "Furniture",
+    "image": "https://example.com/images/wallclock1.jpg",
+    "rating": {
+      "rate": 4.4,
+      "count": 120
+    }
+  },
+  {
+    "id": 25,
+    "title": "Cooking Knife Set",
+    "price": 1299,
+    "description": "Set of sharp and durable cooking knives for all your kitchen needs.",
+    "category": "Kitchenware",
+    "image": "https://example.com/images/knifeset1.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 190
+    }
+  },
+  {
+    "id": 26,
+    "title": "Resistance Bands",
+    "price": 499,
+    "description": "Set of resistance bands for versatile strength and fitness training.",
+    "category": "Fitness",
+    "image": "https://example.com/images/resistancebands1.jpg",
+    "rating": {
+      "rate": 4.3,
+      "count": 100
+    }
+  },
+  {
+    "id": 27,
+    "title": "Women's Flats",
+    "price": 799,
+    "description": "Stylish and comfortable flats for casual and formal occasions.",
+    "category": "Footwear",
+    "image": "https://example.com/images/flats1.jpg",
+    "rating": {
+      "rate": 4.2,
+      "count": 95
+    }
+  },
+  {
+    "id": 28,
+    "title": "Gaming Keyboard",
+    "price": 2499,
+    "description": "Mechanical gaming keyboard with customizable RGB lighting.",
+    "category": "Gaming",
+    "image": "https://example.com/images/gamingkeyboard1.jpg",
+    "rating": {
+      "rate": 4.7,
+      "count": 270
+    }
+  },
+  {
+    "id": 29,
+    "title": "Men's Formal Shirt",
+    "price": 999,
+    "description": "Premium quality formal shirt suitable for office and formal events.",
+    "category": "Clothing",
+    "image": "https://example.com/images/formalshirt1.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 145
+    }
+  },
+  {
+    "id": 30,
+    "title": "Women's Backpack",
+    "price": 1299,
+    "description": "Lightweight and spacious backpack with multiple compartments.",
+    "category": "Accessories",
+    "image": "https://example.com/images/backpack1.jpg",
+    "rating": {
+      "rate": 4.4,
+      "count": 160
+    }
+  },
+  {
+    "id": 31,
+    "title": "Indoor Plant Pot",
+    "price": 499,
+    "description": "Elegant ceramic pot perfect for indoor plants and home decor.",
+    "category": "Furniture",
+    "image": "https://example.com/images/plantpot1.jpg",
+    "rating": {
+      "rate": 4.6,
+      "count": 100
+    }
+  },
+  {
+    "id": 32,
+    "title": "Electric Blender",
+    "price": 1999,
+    "description": "Compact and efficient electric blender for smoothies and shakes.",
+    "category": "Kitchenware",
+    "image": "https://example.com/images/blender1.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 210
+    }
+  },
+  {
+    "id": 33,
+    "title": "Push-Up Bars",
+    "price": 599,
+    "description": "Durable and ergonomic push-up bars for strength training.",
+    "category": "Fitness",
+    "image": "https://example.com/images/pushupbars1.jpg",
+    "rating": {
+      "rate": 4.4,
+      "count": 80
+    }
+  },
+  {
+    "id": 34,
+    "title": "Wireless Charger",
+    "price": 1299,
+    "description": "Fast and reliable wireless charger compatible with most devices.",
+    "category": "Electronics",
+    "image": "https://example.com/images/wirelesscharger1.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 150
+    }
+  },
+  {
+    "id": 35,
+    "title": "Men's Leather Belt",
+    "price": 699,
+    "description": "High-quality leather belt with adjustable buckle for a perfect fit.",
+    "category": "Accessories",
+    "image": "https://example.com/images/leatherbelt1.jpg",
+    "rating": {
+      "rate": 4.6,
+      "count": 160
+    }
+    }
+
+
+
+
+
+
+
+    <Menu as="div" className="relative ml-3">
+                  <div>
+                    {/* <MenuButton className="relative flex rounded-full bg-gray-100 text-2xl ffocus:ring-2 focus:ring-offset-2"> */}
+                      <div className="flex items-center border w-96 focus-within:border-hover transition duration-300 pr-3 gap-1 bg-secondary border-gray-500/30 h-[35px]  rounded-[5px] overflow-hidden">
+                        <input type="text" placeholder="Search for products" className="w-full h-full pl-4 outline-none placeholder-gray-500 text-sm" />
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width={22} height={22} viewBox="0 0 30 30" fill="#E0E0E0">
+                          <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z" />
+                        </svg>
+                      </div>
+                    {/* </MenuButton> */}
+                  </div>
+                  {/* ----------------------------------------SearchItems */}
+                  <MenuItems
+                    transition
+                    className="absolute right-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                  >
+                    <MenuItem>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                      >
+                        Your Profile
+                      </a>
+                    </MenuItem>
+                    <MenuItem>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                      >
+                        Settings
+                      </a>
+                    </MenuItem>
+                    <MenuItem>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                      >
+                        Sign out
+                      </a>
+                    </MenuItem>
+                  </MenuItems>
+                </Menu>

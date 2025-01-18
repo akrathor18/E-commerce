@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: #121212;
+}
+
+.SecondaryBg {
+    background: #1E1E1E;
+}
+
+.AccentColor {
+    background: #4CAF50;
+}
+
+.TextColor {
+    background: #E0E0E0;
+}
+
+.Highlight {
+    background: #FF9800;
+}
+
+
