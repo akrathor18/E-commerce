@@ -5,6 +5,9 @@ import NavBar from './components/navBar';
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/signUp';
 import Products from './components/products';
+import NotFound from './components/404';
+import { BrowserRouter, Routes, Route, useParams, Link , useLocation} from "react-router-dom";
+
 function App() {
 
   const productDetail=[
@@ -438,10 +441,21 @@ function App() {
   return (
     <>
    
-    <NavBar/>
-    <SignUp/>
-    <SignIn/>
-    <Products productDetail={productDetail}/>
+    <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Products productDetail={productDetail}/>} />
+        </Routes>
+        {/* <Footer /> */}
+      </BrowserRouter>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/signin" element={<SignIn/>} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="*" element={<NotFound />} />
+
+      </Routes>
+      </BrowserRouter>
 
     </>
   );

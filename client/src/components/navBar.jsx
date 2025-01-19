@@ -1,8 +1,9 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from '../assets/logo.png'
 import { useState } from 'react'
 import SearchBar from './searchBar'
+import { Link } from 'react-router-dom'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -27,13 +28,15 @@ export default function NavBar() {
             </DisclosureButton>
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+          <Link to={'/'}>
             <div className="flex shrink-0 items-center">
               <img
-                alt="Your Company"
+                alt="UrbanMart"
                 src={logo}
                 className="h-8 w-auto"
-              />
+                />
             </div>
+                </Link>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
 
@@ -72,12 +75,12 @@ export default function NavBar() {
                   </a>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
+                  <Link
+                   to={"/signup"}
                     className="block px-4 py-2 text-sm  data-[focus]:bg-primary hover:text-hover data-[focus]:outline-none"
                   >
                     sign-in
-                  </a>
+                  </Link>
                 </MenuItem>
 
               </MenuItems>
