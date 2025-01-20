@@ -1,7 +1,6 @@
 function Products(props) {
    return(
     <>
-    {console.log(props)}
     <section className="relative flex col-span-1">
   <div className="mx-auto grid w-full gap-8 md:grid-cols-2 lg:grid-cols-3 m-2">
     {props.productDetail.map((items) => (

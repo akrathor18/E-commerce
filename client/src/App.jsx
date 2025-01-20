@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react'
+import { React, useState, Suspense, lazy } from 'react';
 import axios from "axios";
 import './App.css'
-import NavBar from './components/navBar'; 
-import { SignIn } from './components/SignIn';
-import { SignUp } from './components/signUp';
-import Products from './components/products';
-import NotFound from './components/404';
-import { BrowserRouter, Routes, Route, useParams, Link , useLocation} from "react-router-dom";
+import NavBar from './components/navBar';
+import { BrowserRouter, Routes, Route, useParams, Link, useLocation } from "react-router-dom";
+
+
+const Products = lazy(() => import("./components/Products"));
+const SignIn = lazy(() => import("./components/SignIn"))
+const SignUp = lazy(() => import("./components/SignUp"));
+const NotFound = lazy(() => import("./components/404"));
 
 function App() {
 
-  const productDetail=[
+  const productDetail = [
     {
       "id": 1,
       "title": "Men's Casual T-Shirt",
@@ -430,36 +432,44 @@ function App() {
         "rate": 4.6,
         "count": 160
       }
-      }
+    }
   ]
- 
+
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
 
   // Array of categories
- 
+
 
   return (
     <>
-   
-    <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Products productDetail={productDetail}/>} />
-        </Routes>
-        {/* <Footer /> */}
-      </BrowserRouter>
-      <BrowserRouter>
-      <Routes>
-        <Route path="/signin" element={<SignIn/>} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="*" element={<NotFound />} />
 
-      </Routes>
+      <BrowserRouter>
+        <Suspense
+          fallback={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+              }}
+            >Loading...</div>}>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Products productDetail={productDetail} />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
+
 
     </>
   );
- 
+
 }
 
 export default App

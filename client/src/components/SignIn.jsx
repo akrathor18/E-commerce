@@ -26,12 +26,12 @@ export function SignIn() {
                         <h2 className="text-3xl font-bold leading-tight text-text sm:text-4xl">Sign in</h2>
                         <p className="mt-2 text-sm text-gray-100">
                             Don&apos;t have an account?{' '}
-                            <a
-                                to={'/'}
+                            <Link
+                                to={'/signup'}
                                 className="font-semibold text-hover transition-all duration-200 hover:underline"
                             >
                                 Create a free account
-                            </a>
+                            </Link>
                         </p>
                         <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
                             <div className="space-y-5">
