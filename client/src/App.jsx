@@ -3,11 +3,9 @@ import axios from "axios";
 import './App.css'
 import NavBar from './components/navBar';
 import { BrowserRouter, Routes, Route, useParams, Link, useLocation } from "react-router-dom";
-
-
+const SignUp = lazy(() => import("./components/SignUp"));
 const Products = lazy(() => import("./components/Products"));
 const SignIn = lazy(() => import("./components/SignIn"))
-const SignUp = lazy(() => import("./components/SignUp"));
 const NotFound = lazy(() => import("./components/404"));
 
 function App() {
@@ -455,7 +453,7 @@ function App() {
                 fontSize: "1.5rem",
                 fontWeight: "bold",
               }}
-            >Loading...</div>}>
+            ><div class="spinner"></div></div>}>
           <NavBar />
           <Routes>
             <Route path="/" element={<Products productDetail={productDetail} />} />

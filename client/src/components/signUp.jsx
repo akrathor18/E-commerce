@@ -4,7 +4,8 @@ import { ArrowRight, EyeOff, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 
-export function SignUp() {
+ function SignUp() {
+    {document.title="Sign-Up"}
     const [showPass, setShowPass] = useState(false);
 
     const {
@@ -18,7 +19,6 @@ export function SignUp() {
         console.log("Form submitted with data:", data);
         alert("Form submitted successfully!");
     };
-
     return (
         <section>
             <div className="grid grid-cols-1  bg-primary">
@@ -198,3 +198,6 @@ export function SignUp() {
         </section>
     );
 }
+
+
+export default SignUp;

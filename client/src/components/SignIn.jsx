@@ -3,7 +3,9 @@ import { ArrowRight, EyeOff, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 
-export function SignIn() {
+function SignIn() {
+    {document.title="Sign-In"}
+
     const [showPass, setShowPass] = useState(false);
 
     const {
@@ -106,3 +108,5 @@ export function SignIn() {
         </section>
     );
 }
+
+export default SignIn;
