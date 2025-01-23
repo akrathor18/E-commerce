@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Search } from 'lucide-react';
 
 function searchBar() {
 
@@ -55,12 +56,13 @@ function searchBar() {
                 {searchResults.map((result, index) => (
                   <li
                     key={index}
-                    className="px-4 py-2 hover:bg-primary hover:text-hover cursor-pointer"
+                    className="px-4 py-2 flex gap-3 hover:bg-primary hover:text-hover cursor-pointer"
                     onClick={() => {
                       setSearchQuery(result); // Set search bar value when a suggestion is clicked
                       setSearchResults([]); // Hide the dropdown
                     }}
                   >
+                    <Search />
                     {result}
                   </li>
                 ))}

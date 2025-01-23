@@ -28,19 +28,15 @@ body{
 }
 
 
-
-/* From Uiverse.io by JaydipPrajapati1910 */ 
 .button {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 15px;
+    padding:0px 10px;
     gap: 15px;
-    background-color: #181717;
-    outline: 3px #181717 solid;
+    background-color:  #4CAF50;
     outline-offset: -3px;
-    border-radius: 5px;
-    border: none;
+    border-radius: 10px;
     cursor: pointer;
     transition: 400ms;
   }
@@ -57,13 +53,92 @@ body{
   }
   
   .button:hover {
-    background-color: #E0E0E0;
+    background-color:  #FF9800;
   }
   
   .button:hover .text {
-    color: #181717;
+    color: #E0E0E0;
   }
   
   .button:hover svg path {
-    fill: #181717;
+    fill: #E0E0E0;
   }
+
+
+
+.cartBtn {
+  width: 155px;
+  height: 50px;
+  border: none;
+  border-radius: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: white;
+  border-radius:10px;
+  font-weight: 500;
+  position: relative;
+  background-color: #4CAF50;
+  box-shadow: 0 20px 30px -7px rgba(27, 27, 27, 0.219);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+}
+.cartBtn:hover{
+  background-color:  #FF9800;
+
+
+}
+
+.cart {
+  z-index: 2;
+}
+
+.cartBtn:active {
+  transform: scale(0.96);
+}
+
+.product {
+  position: absolute;
+  width: 12px;
+  border-radius: 3px;
+  content: "";
+  left: 23px;
+  bottom: 23px;
+  opacity: 0;
+  z-index: 1;
+  fill: rgb(211, 211, 211);
+}
+
+.cartBtn:hover .product {
+  animation: slide-in-top 1.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-30px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0) rotate(-90deg);
+    opacity: 1;
+  }
+}
+
+.cartBtn:hover .cart {
+  animation: slide-in-left 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
