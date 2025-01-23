@@ -1,15 +1,19 @@
-import { React, useState, Suspense, lazy } from 'react';
+import { React, useState, Suspense, lazy } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import "./App.css";
+import NavBar from "./components/navBar";
 import axios from "axios";
-import './App.css'
-import NavBar from './components/navBar';
-import { BrowserRouter, Routes, Route, useParams, Link, useLocation } from "react-router-dom";
+
+// Lazy-loaded components
 const SignUp = lazy(() => import("./components/SignUp"));
-const Products = lazy(() => import("./components/Products"));
-const SignIn = lazy(() => import("./components/SignIn"))
+const Products = lazy(() => import("./components/products"));
+const SignIn = lazy(() => import("./components/SignIn"));
 const NotFound = lazy(() => import("./components/404"));
+const AdminPanel = lazy(() => import("./components/AdminPanel"));
 
-function App() {
-
+const App = () => {
+  const location = useLocation(); // Must be inside BrowserRouter
+  const hideNavBarPaths = ["/admin" ];
   const productDetail = [
     {
       "id": 1,
@@ -432,45 +436,47 @@ function App() {
       }
     }
   ]
-
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
 
-  // Array of categories
-
-
   return (
-    <>
+    <div>
+      {/* Conditionally render NavBar */}
+      {!hideNavBarPaths.includes(location.pathname) && <NavBar />}
 
-      <BrowserRouter>
-        <Suspense
-          fallback={
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-                fontSize: "1.5rem",
-                fontWeight: "bold",
-              }}
-            ><div class="spinner"></div></div>}>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Products productDetail={productDetail} />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-
-
-    </>
+      {/* Suspense for lazy loading */}
+      <Suspense
+        fallback={
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+            }}
+          >
+            <div className="spinner"></div>
+          </div>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<Products productDetail={productDetail} />} />
+          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </div>
   );
+};
 
-}
+// Wrap App in BrowserRouter at the root level
+const Root = () => (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
 
-export default App
-
-
-
+export default Root;
