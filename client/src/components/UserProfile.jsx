@@ -4,19 +4,17 @@ import { Link } from "react-router-dom";
 import { CircleUser, Package, Settings, CreditCard, Gift, Star, Bell, Heart, LogOut } from "lucide-react";
 
 function UserProfile() {
+  document.title='My Profile'
   return (
     <div className="flex min-h-screen bg-primary text-text">
       {/* Sidebar */}
       <div className="w-64 border-r lg:w-1/4 md:w-2/5 sm:w-full">
         <div className="p-4 border-b">
           <div className="flex items-center gap-2">
-            <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-8mIcdPL2evdnmKKhzL94d0dvZXBq0M.png"
-              alt="User avatar"
-              className="rounded-full"
-              width={32}
-              height={32}
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+</svg>
+
             <span>Hello</span>
           </div>
         </div>
@@ -24,7 +22,7 @@ function UserProfile() {
           {/* Sidebar Links */}
           <Link
             href="#"
-            className="flex items-center gap-2 px-2 py-1.5 text-sm text-gray-700 hover:text-blue-600"
+            className="flex items-center gap-2 px-2 py-1.5 text-sm text-text hover:text-blue-600"
           >
             <Package className="w-4 h-4" />
             MY ORDERS
@@ -40,49 +38,32 @@ function UserProfile() {
             <Link href="#" className="block px-4 py-1.5 text-sm text-blue-600">
               Profile Information
             </Link>
-            <Link href="#" className="block px-4 py-1.5 text-sm text-gray-700">
+            <Link href="#" className="block px-4 py-1.5 text-sm text-text">
               Manage Addresses
             </Link>
-            <Link href="#" className="block px-4 py-1.5 text-sm text-gray-700">
+            <Link href="#" className="block px-4 py-1.5 text-sm text-text">
               PAN Card Information
             </Link>
           </div>
           <div className="space-y-1">
-            <div className="flex items-center gap-2 px-2 py-1.5 text-sm text-gray-700">
+            <div className="flex items-center gap-2 px-2 py-1.5 text-sm text-text">
               <CreditCard className="w-4 h-4" />
               PAYMENTS
             </div>
-            <Link href="#" className="flex items-center justify-between px-4 py-1.5 text-sm text-gray-700">
+            <Link href="#" className="flex items-center justify-between px-4 py-1.5 text-sm text-text">
               Gift Cards
               <span className="text-xs bg-gray-100 px-1.5 py-0.5 rounded">₹0</span>
             </Link>
-            <Link href="#" className="block px-4 py-1.5 text-sm text-gray-700">
+            <Link href="#" className="block px-4 py-1.5 text-sm text-text">
               Saved UPI
             </Link>
-            <Link href="#" className="block px-4 py-1.5 text-sm text-gray-700">
+            <Link href="#" className="block px-4 py-1.5 text-sm text-text">
               Saved Cards
             </Link>
           </div>
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 px-2 py-1.5 text-sm text-gray-700">
-              <Gift className="w-4 h-4" />
-              MY STUFF
-            </div>
-            <Link href="#" className="block px-4 py-1.5 text-sm text-gray-700">
-              My Coupons
-            </Link>
-            <Link href="#" className="block px-4 py-1.5 text-sm text-gray-700">
-              My Reviews & Ratings
-            </Link>
-            <Link href="#" className="block px-4 py-1.5 text-sm text-gray-700">
-              All Notifications
-            </Link>
-            <Link href="#" className="block px-4 py-1.5 text-sm text-gray-700">
-              My Wishlist
-            </Link>
-          </div>
+          
           <div>
-            <Link href="#" className="flex items-center gap-2 px-2 py-1.5 text-sm text-gray-700 hover:text-blue-600">
+            <Link href="#" className="flex items-center gap-2 px-2 py-1.5 text-lg text-red-600 hover:text-red-700">
               <LogOut className="w-4 h-4" />
               Logout
             </Link>

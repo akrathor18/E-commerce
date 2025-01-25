@@ -3,13 +3,14 @@ import { Link } from "react-router-dom"
 import { Rocket } from "lucide-react"
 import { useState, useEffect } from "react"
 
-function NotFound() {
+function NotFound() {{
+  document.title='404-Not Found'}
   const [rotation, setRotation] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
       setRotation((prev) => (prev + 1) % 360)
-    }, 200)
+    }, 100)
     return () => clearInterval(interval)
   }, [])
 

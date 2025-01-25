@@ -4,11 +4,23 @@ function Products(props) {
   { document.title = 'UrbanMart - an E-commarce website for online shopping' }
   const [cartItems, setCartItems] = useState([])
 
-  const handleClick = (items) => {
-    console.log(items)
-    setCartItems([...cartItems, items])
-    console.log(cartItems)
+  const handleClick = (item) => {
+    setCartItems((prevCartItems) => {
+      // Check if the product is already in the cart
+      const isAlreadyInCart = prevCartItems.some((cartItem) => cartItem.id === item.id);
+  
+      if (isAlreadyInCart) {
+        console.log("Product is already in the cart");
+        return prevCartItems; // Return the current cart without changes
+      }
+  
+      // Add the new product to the cart
+      const updatedCart = [...prevCartItems, item];
+      console.log(updatedCart); // Log the updated cart
+      return updatedCart;
+    });
   };
+  
 
   return (
     <>
