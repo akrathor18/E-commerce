@@ -2,7 +2,7 @@ import { IndianRupee } from 'lucide-react';
 import { useState } from 'react';
 function Products(props) {
   { document.title = 'UrbanMart - an E-commarce website for online shopping' }
-  const [cartItems, setCartItems]= useState([])
+  const [cartItems, setCartItems] = useState([])
 
   const handleClick = (items) => {
     console.log(items)
@@ -12,7 +12,21 @@ function Products(props) {
 
   return (
     <>
+
+      <div 
+      title='Viwe Cart'
+      className="flex text-text bg-accent outline-red-200 hover:bg-hover transition-all duration-300 ease-in-out p-3 rounded-full fixed z-20 bottom-0 right-0 m-20">
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-10">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+          </svg>
+        </button>
+        <span className="absolute -top-14 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 px-3 rounded-lg border border-gray-300  bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">Viwe cart <span> </span></span>
+      </div>
+
       <section className="relative flex col-span-1">
+
+
         <div className="mx-auto grid w-full gap-8 md:grid-cols-2 lg:grid-cols-3 m-2">
           {props.productDetail.map((items) => (
             <div
@@ -61,7 +75,7 @@ function Products(props) {
                     <p className="text">Buy Now</p>
                   </button>
                   <button class="cartBtn"
-                  onClick={() => handleClick(items)}
+                    onClick={() => handleClick(items)}
                   >
                     <svg class="cart" fill="white" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path></svg>
                     ADD TO CART
@@ -75,6 +89,10 @@ function Products(props) {
           ))}
         </div>
       </section>
+
+
+
+
     </>
 
   )

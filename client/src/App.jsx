@@ -10,6 +10,7 @@ const Products = lazy(() => import("./components/products"));
 const SignIn = lazy(() => import("./components/SignIn"));
 const NotFound = lazy(() => import("./components/404"));
 const AdminPanel = lazy(() => import("./components/AdminPanel"));
+const UserProfile = lazy(() => import("./components/UserProfile"));
 
 const App = () => {
   const location = useLocation(); // Must be inside BrowserRouter
@@ -465,6 +466,7 @@ const App = () => {
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

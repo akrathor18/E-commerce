@@ -8,9 +8,9 @@ import logo from '../assets/logo.png'
 const AdminPanel = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   return (
-    <div className="text-text font-inter">
+    <div className="text-text font-inter transition-all duration-300 ease-in-out">
       {/* Sidebar */}
-      <div className={`fixed left-0 top-0 w-64 h-full bg-primary p-4 z-50  transition-transform ${sidebarOpen ? '' : 'hidden'} `}>
+      <div className={`fixed  left-0 top-10 z-10 w-64 h-full bg-primary p-4  transition-transform ${sidebarOpen ? '' : 'hidden'} `}>
         <a href="#" className={`flex items-center pb-4 border-b border-b-gray-400 `}>
           <h2 className="font-bold text-2xl">
            <img src={logo} alt="logo"/>
@@ -71,7 +71,7 @@ const AdminPanel = () => {
 
 
       {/* Main Content */}
-      <main className={`  w-full ${sidebarOpen ? 'md:ml-64 md:w-[calc(100%-256px)]' : ''}    bg-secondary min-h-screen transition-all main`}>
+      <main className={` z-20 w-full ${sidebarOpen ? 'md:ml-64 md:w-[calc(100%-256px)]' : ''}    bg-secondary min-h-screen transition-all main`}>
         {/* Navbar */}
         <div className="py-2 px-6 bg-primary flex items-center shadow-md shadow-gray-900 sticky top-0 left-0 z-30">
           <button 
