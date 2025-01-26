@@ -11,6 +11,7 @@ const SignIn = lazy(() => import("./components/SignIn"));
 const NotFound = lazy(() => import("./components/404"));
 const AdminPanel = lazy(() => import("./components/AdminPanel"));
 const UserProfile = lazy(() => import("./components/UserProfile"));
+const ShoppingCart = lazy(() => import("./components/ShoppingCart"));
 
 const App = () => {
   const location = useLocation(); // Must be inside BrowserRouter
@@ -467,6 +468,8 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/Mycart" element={<ShoppingCart />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

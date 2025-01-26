@@ -1,5 +1,6 @@
 import { IndianRupee } from 'lucide-react';
 import { useState } from 'react';
+import{Link} from 'react-router-dom'
 function Products(props) {
   { document.title = 'UrbanMart - an E-commarce website for online shopping' }
   const [cartItems, setCartItems] = useState([])
@@ -24,7 +25,7 @@ function Products(props) {
 
   return (
     <>
-
+      <Link to={"/mycart"}>
       <div 
       title='Viwe Cart'
       className="flex text-text bg-accent outline-red-200 hover:bg-hover transition-all duration-300 ease-in-out p-3 rounded-full fixed z-20 bottom-0 right-0 m-20">
@@ -35,6 +36,7 @@ function Products(props) {
         </button>
         <span className="absolute -top-14 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 px-3 rounded-lg border border-gray-300  bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">Viwe cart <span> </span></span>
       </div>
+        </Link>
 
       <section className="relative flex col-span-1">
 
