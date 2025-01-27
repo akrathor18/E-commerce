@@ -25,6 +25,7 @@ function Products(props) {
 
   return (
     <>
+    {/* Floating cart button  */}
       <Link to={"/mycart"}>
       <div 
       title='Viwe Cart'

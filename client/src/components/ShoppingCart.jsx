@@ -87,13 +87,11 @@ import { useState } from "react"
                     <div>
                       <h3 className="text-base font-medium text-text">{product.title}</h3>
                       <p className="mt-1 text-sm text-text">{product.rating.rate}</p>
-                      {/* <p className="mt-1 text-sm text-gray-500">{product.size}</p> */}
                     </div>
                     <p className="text-base font-medium text-text">₹{product.price.toFixed(2)}</p>
                   </div>
 
                   <div className="flex items-center justify-between mt-4">
-                   
                       <p className="text-sm text-green-500 flex items-center">
                         <span className="mr-1.5">✓</span> In stock
                       </p>
