@@ -1,10 +1,13 @@
-import { React, useState } from "react";
+import { React, useState, Suspense, lazy } from "react";
 import { UserCog, Users, Plus, House, Shuffle, AlignJustify } from 'lucide-react';
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { BrowserRouter, Routes, Route, useLocation,Link } from "react-router-dom";
+import logo from "../../assets/logo.png"
 
-import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
+
+
+const AddProduct = lazy(() => import("./AddProduct"));
+
 const AdminPanel = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   return (
@@ -19,25 +22,25 @@ const AdminPanel = () => {
         <ul className="mt-4">
           <span className="text-accent font-bold">ADMIN</span>
           <li className="mb-1 group">
-            <a
-              href="#"
+            <Link
+              to={"/"}
               className="flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.active]:bg-hover group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
             >
               <i className="ri-home-2-line mr-3 text-lg"></i>
               <House />
               <span className="text-sm pl-3">Dashboard</span>
-            </a>
+            </Link>
           </li>
           <li className="mb-1 group">
-            <a
-              href="#"
+            <Link
+              to={'/admin/addproduct'}
               className="flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.active]:bg-hover group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle"
             >
               <i className="bx bx-user mr-3 text-lg"></i>
               <Plus />
               <span className="text-sm pl-2">Add Products</span>
               <i className="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-            </a>
+            </Link>
 
           </li>
           <li className="mb-1 group">
@@ -126,24 +129,28 @@ const AdminPanel = () => {
         </div>
 
         {/* Content */}
-        <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-            <div className="bg-primary rounded-md border border-gray-500 p-6 shadow-md shadow-black/5">
-              <div className="flex justify-between mb-6">
-                <div>
-                  <div className="flex items-center mb-1">
-                    <div className="text-2xl font-semibold">2</div>
-                  </div>
-                  <div className="text-sm font-medium text-gray-300">Users</div>
+      <Suspense
+              fallback={
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh",
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                  }}
+                >
+                  <div className="spinner"></div>
                 </div>
-              </div>
-              <a href="/users" className="text-accent font-medium text-sm hover:text-green-400">
-                View
-              </a>
-            </div>
-            {/* Add other content cards similarly */}
-          </div>
-        </div>
+              }
+            >
+              <Routes>
+            
+                <Route path="/admin/addproduct" element={<AddProduct />} />
+      
+              </Routes>
+            </Suspense>
       </main>
     </div>
   );

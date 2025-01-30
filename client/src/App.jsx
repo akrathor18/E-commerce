@@ -9,13 +9,14 @@ const SignUp = lazy(() => import("./components/SignUp"));
 const Products = lazy(() => import("./components/products"));
 const SignIn = lazy(() => import("./components/SignIn"));
 const NotFound = lazy(() => import("./components/404"));
-const AdminPanel = lazy(() => import("./components/AdminPanel"));
 const UserProfile = lazy(() => import("./components/UserProfile"));
 const ShoppingCart = lazy(() => import("./components/ShoppingCart"));
 
+const AdminPanel = lazy(() => import("./components/Admin/AdminPanel"));
+
 const App = () => {
   const location = useLocation(); // Must be inside BrowserRouter
-  const hideNavBarPaths = ["/admin" ];
+  const hideNavBarPaths = ["/admin" , "/admin/","/admin/addproduct"];
   const productDetail = [
     {
       "id": 1,
@@ -464,13 +465,14 @@ const App = () => {
       >
         <Routes>
           <Route path="/" element={<Products productDetail={productDetail} />} />
-          <Route path="/admin" element={<AdminPanel />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/Mycart" element={<ShoppingCart />} />
+          <Route path="/admin" element={<AdminPanel />} />
+          {/* <Route path="/admin/addproduct" element={<AddProduct />} /> */}
 
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </Suspense>
     </div>
