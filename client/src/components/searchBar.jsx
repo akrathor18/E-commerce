@@ -425,8 +425,7 @@ function searchBar() {
       }
     }
   ]
-
-    const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   // Example search suggestions (replace with API call or dynamic data as needed)
   // console.log(props.productDetail[1])
@@ -438,7 +437,7 @@ function searchBar() {
       const titles = productDetail.map((item) => item.title);
       setSuggestions(titles);
   
-  }, [productDetail]); 
+  }, []); 
   
 
   
@@ -457,7 +456,6 @@ function searchBar() {
       setSearchResults([]);
     }
   };
-
   return(
     <div className="relative ml-3">
           {/* Search bar */}
