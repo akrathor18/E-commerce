@@ -1,9 +1,9 @@
 import { React, useState, Suspense, lazy } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import NavBar from "./components/navBar";
 import axios from "axios";
 
+import NavBar from "./components/navBar";
 // Lazy-loaded components
 const SignUp = lazy(() => import("./components/SignUp"));
 const Products = lazy(() => import("./components/products"));
@@ -13,10 +13,12 @@ const UserProfile = lazy(() => import("./components/UserProfile"));
 const ShoppingCart = lazy(() => import("./components/ShoppingCart"));
 
 const AdminPanel = lazy(() => import("./components/Admin/AdminPanel"));
+const AddProduct = lazy(() => import("./components/Admin/AddProduct"));
+
+
+
 
 const App = () => {
-  const location = useLocation(); // Must be inside BrowserRouter
-  const hideNavBarPaths = ["/admin" , "/admin/","/admin/addproduct"];
   const productDetail = [
     {
       "id": 1,
@@ -439,51 +441,61 @@ const App = () => {
       }
     }
   ]
-  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element:
+        <>
+          <NavBar />
+          <Products productDetail={productDetail} />
+        </>
+    },
+    {
+      path: '/signin',
+      element: <>
+        <NavBar />
+        <SignIn />
+      </>,
+    },
+    {
+      path: '/signup',
+      element: <>
+        <NavBar />
+        <SignUp />
+      </>,
+    },
+    {
+      path: '/profile',
+      element: <>
+        <NavBar />
+        <UserProfile />
+      </>,
+    },
+    {
+      path: '/Mycart',
+      element: <>
+        <NavBar />
+        <ShoppingCart />
+      </>,
+    },
+    {
+      path: '/profile',
+      element: <>
+        <NavBar />
+        <UserProfile />
+      </>,
+    },
+  ]);
 
   return (
-    <div>
-      {/* Conditionally render NavBar */}
-      {!hideNavBarPaths.includes(location.pathname) && <NavBar />}
-
-      {/* Suspense for lazy loading */}
-      <Suspense
-        fallback={
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100vh",
-              fontSize: "1.5rem",
-              fontWeight: "bold",
-            }}
-          >
-            <div className="spinner"></div>
-          </div>
-        }
-      >
-        <Routes>
-          <Route path="/" element={<Products productDetail={productDetail} />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/profile" element={<UserProfile />} />
-          <Route path="/Mycart" element={<ShoppingCart />} />
-          <Route path="/admin" element={<AdminPanel />} />
-          {/* <Route path="/admin/addproduct" element={<AddProduct />} /> */}
-
-          {/* <Route path="*" element={<NotFound />} /> */}
-        </Routes>
-      </Suspense>
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 };
 
 // Wrap App in BrowserRouter at the root level
-const Root = () => (
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
 
-export default Root;
+
+export default App;
