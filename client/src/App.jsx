@@ -1,8 +1,7 @@
 import { React, useState, Suspense, lazy } from "react";
-import { BrowserRouter, Routes, Route, useLocation, createBrowserRouter, RouterProvider } from "react-router-dom";
+import {  createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import axios from "axios";
-
+import Loader from "./components/Loader";
 import NavBar from "./components/navBar";
 // Lazy-loaded components
 const SignUp = lazy(() => import("./components/SignUp"));
@@ -16,6 +15,7 @@ import AdminPanel from "./components/Admin/AdminPanel";
 const AddProduct = lazy(() => import("./components/Admin/AddProduct"));
 const Dashboard = lazy(() => import("./components/Admin/Dashboard"));
 const Orders = lazy(() => import("./components/Admin/Orders"));
+const ProductManagement = lazy(() => import("./components/Admin/ProductManagement/ProductManagement"));
 
 
 
@@ -446,64 +446,105 @@ const App = () => {
 
   const router = createBrowserRouter([
     {
-      path: '/',
-      element:
+      path: "/",
+      element: (
         <>
           <NavBar />
-          <Products productDetail={productDetail} />
+          <Suspense fallback={<Loader />}>
+            <Products productDetail={productDetail} />
+          </Suspense>
         </>
+      ),
     },
     {
-      path: '/signin',
-      element: <>
-        <NavBar />
-        <SignIn />
-      </>,
+      path: "/signin",
+      element: (
+        <>
+          <NavBar />
+          <Suspense fallback={<Loader />}>
+            <SignIn />
+          </Suspense>
+        </>
+      ),
     },
     {
-      path: '/signup',
-      element: <>
-        <NavBar />
-        <SignUp />
-      </>,
+      path: "/signup",
+      element: (
+        <>
+          <NavBar />
+          <Suspense fallback={<Loader />}>
+            <SignUp />
+          </Suspense>
+        </>
+      ),
     },
     {
-      path: '/profile',
-      element: <>
-        <NavBar />
-        <UserProfile />
-      </>,
+      path: "/profile",
+      element: (
+        <>
+          <NavBar />
+          <Suspense fallback={<Loader />}>
+            <UserProfile />
+          </Suspense>
+        </>
+      ),
     },
     {
-      path: '/Mycart',
-      element: <>
-        <NavBar />
-        <ShoppingCart />
-      </>,
+      path: "/Mycart",
+      element: (
+        <>
+          <NavBar />
+          <Suspense fallback={<Loader />}>
+            <ShoppingCart />
+          </Suspense>
+        </>
+      ),
     },
     {
-      path:'*',
-      element: <NotFound />
+      path: "*",
+      element: <NotFound />,
     },
     {
-      path: '/admin',
-      element:
-        <AdminPanel />
-      ,
-      children:[
+      path: "/admin",
+      element: (
+        <Suspense fallback={<Loader />}>
+          <AdminPanel />
+        </Suspense>
+      ),
+      children: [
         {
-          path:'addproduct',
-          element: <AddProduct />
+          path: "addproduct",
+          element: (
+            <Suspense fallback={<Loader />}>
+              <AddProduct />
+            </Suspense>
+          ),
         },
         {
-          path:'dashboard',
-          element: <Dashboard />
+          path: "dashboard",
+          element: (
+            <Suspense fallback={<Loader />}>
+              <Dashboard />
+            </Suspense>
+          ),
         },
         {
-          path:'orders',
-          element: <Orders />
-        }
-      ]
+          path: "orders",
+          element: (
+            <Suspense fallback={<Loader />}>
+              <Orders />
+            </Suspense>
+          ),
+        },
+        {
+          path: "ProductManagement",
+          element: (
+            <Suspense fallback={<Loader />}>
+              <ProductManagement />
+            </Suspense>
+          ),
+        },
+      ],
     },
   ]);
 

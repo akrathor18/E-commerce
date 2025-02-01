@@ -56,16 +56,16 @@ const AdminPanel = () => {
 
           </li>
           <li className="mb-1 group">
-            <a
-              href="#"
+            <Link
+              to="ProductManagement"
               className="flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.active]:bg-hover group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle"
             >
               <i className="bx bx-user mr-3 text-lg"></i>
               <Users />
               <span className="text-sm pl-3">
-                Users</span>
+                Product Managment</span>
               <i className="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-            </a>
+            </Link>
 
           </li>
           {/* Add other sidebar items similarly */}
