@@ -1,7 +1,7 @@
 import { React, useState, Suspense, lazy } from "react";
 import { UserCog, Users, Plus, House, Shuffle, AlignJustify } from 'lucide-react';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { BrowserRouter, Routes, Route, useLocation,Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation,Link, Outlet } from "react-router-dom";
 import logo from "../../assets/logo.png"
 
 
@@ -23,7 +23,7 @@ const AdminPanel = () => {
           <span className="text-accent font-bold">ADMIN</span>
           <li className="mb-1 group">
             <Link
-              to={"/"}
+              to={"./dashboard"}
               className="flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.active]:bg-hover group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
             >
               <i className="ri-home-2-line mr-3 text-lg"></i>
@@ -33,7 +33,7 @@ const AdminPanel = () => {
           </li>
           <li className="mb-1 group">
             <Link
-              to={'/admin/addproduct'}
+              to={'./addproduct'}
               className="flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.active]:bg-hover group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle"
             >
               <i className="bx bx-user mr-3 text-lg"></i>
@@ -44,15 +44,15 @@ const AdminPanel = () => {
 
           </li>
           <li className="mb-1 group">
-            <a
-              href="#"
+            <Link
+              to="./orders"
               className="flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.active]:bg-hover group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle"
             >
               <i className="bx bx-user mr-3 text-lg"></i>
               <Shuffle />
               <span className="text-sm pl-3">Oders</span>
               <i className="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-            </a>
+            </Link>
 
           </li>
           <li className="mb-1 group">
@@ -129,28 +129,7 @@ const AdminPanel = () => {
         </div>
 
         {/* Content */}
-      <Suspense
-              fallback={
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100vh",
-                    fontSize: "1.5rem",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <div className="spinner"></div>
-                </div>
-              }
-            >
-              <Routes>
-            
-                <Route path="/admin/addproduct" element={<AddProduct />} />
-      
-              </Routes>
-            </Suspense>
+      <Outlet/>
       </main>
     </div>
   );

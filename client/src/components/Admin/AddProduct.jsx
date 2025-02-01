@@ -36,7 +36,7 @@ function AddProduct() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-secondary text-gray-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Add New Product</h2>
         {isSuccess ? (
@@ -47,7 +47,7 @@ function AddProduct() {
               <label className="block text-sm font-medium mb-1">Product Name</label>
               <input
                 {...register("name", { required: "Product name is required" })}
-                className={`w-full px-3 py-2 bg-gray-800 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`w-full px-3 py-2 bg-primary border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   errors.name ? "border-red-500" : "border-gray-700"
                 }`}
               />
@@ -59,7 +59,7 @@ function AddProduct() {
               <textarea
                 {...register("description", { required: "Description is required" })}
                 rows={3}
-                className={`w-full px-3 py-2 bg-gray-800 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`w-full px-3 py-2 bg-primary border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   errors.description ? "border-red-500" : "border-gray-700"
                 }`}
               ></textarea>
@@ -75,7 +75,7 @@ function AddProduct() {
                   min: { value: 0.01, message: "Price must be greater than 0" },
                 })}
                 step="0.01"
-                className={`w-full px-3 py-2 bg-gray-800 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`w-full px-3 py-2 bg-primary border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   errors.price ? "border-red-500" : "border-gray-700"
                 }`}
               />
@@ -88,7 +88,7 @@ function AddProduct() {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="w-full px-3 py-2 bg-gray-800 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-primary border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.image && <p className="mt-1 text-xs text-red-500">{errors.image.message}</p>}
             </div>
@@ -108,7 +108,7 @@ function AddProduct() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full font-bold py-2 px-4 rounded-md transition duration-300 ${
+              className={`inline-flex w-full items-center justify-center rounded-md bg-primary px-3.5 py-2.5 font-semibold leading-7 text-text hover:text-hover hover:bg-secondary hover:border-accent border-2 ${
                 isSubmitting ? "bg-gray-600 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700 text-white"
               }`}
             >

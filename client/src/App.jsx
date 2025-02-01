@@ -12,8 +12,10 @@ const NotFound = lazy(() => import("./components/404"));
 const UserProfile = lazy(() => import("./components/UserProfile"));
 const ShoppingCart = lazy(() => import("./components/ShoppingCart"));
 
-const AdminPanel = lazy(() => import("./components/Admin/AdminPanel"));
+import AdminPanel from "./components/Admin/AdminPanel";
 const AddProduct = lazy(() => import("./components/Admin/AddProduct"));
+const Dashboard = lazy(() => import("./components/Admin/Dashboard"));
+const Orders = lazy(() => import("./components/Admin/Orders"));
 
 
 
@@ -480,11 +482,28 @@ const App = () => {
       </>,
     },
     {
-      path: '/profile',
-      element: <>
-        <NavBar />
-        <UserProfile />
-      </>,
+      path:'*',
+      element: <NotFound />
+    },
+    {
+      path: '/admin',
+      element:
+        <AdminPanel />
+      ,
+      children:[
+        {
+          path:'addproduct',
+          element: <AddProduct />
+        },
+        {
+          path:'dashboard',
+          element: <Dashboard />
+        },
+        {
+          path:'orders',
+          element: <Orders />
+        }
+      ]
     },
   ]);
 
