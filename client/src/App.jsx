@@ -45,7 +45,7 @@ const App = () => {
       "category": "Footwear",
       "image": "https://cdn.pixabay.com/photo/2018/01/25/00/18/sneakers-3105120_1280.jpg",
       "rating": {
-        "rate": 4.5,
+        "rate": 2.5,
         "count": 200
       },
       "stock": 150
@@ -87,7 +87,7 @@ const App = () => {
       "category": "Fitness",
       "image": "https://cdn.pixabay.com/photo/2020/04/07/16/05/body-building-5013985_1280.jpg",
       "rating": {
-        "rate": 4.6,
+        "rate": 1.6,
         "count": 180
       },
       "stock": 75
@@ -515,7 +515,6 @@ const App = () => {
   ];
   
   
-  
 
   const router = createBrowserRouter([
     {
@@ -524,7 +523,7 @@ const App = () => {
         <>
           <NavBar />
           <Suspense fallback={<Loader />}>
-            <Products productDetail={productDetail} />
+            <Products initialProducts={productDetail} />
           </Suspense>
         </>
       ),

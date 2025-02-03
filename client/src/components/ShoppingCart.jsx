@@ -51,7 +51,7 @@ import { useState } from "react"
       "count": 95
     }
   },])
-
+  {document.title='My Cart'}
   const subtotal = products.reduce((sum, product) => sum + product.price, 0)
 
   const handleRemove = (productId) => {

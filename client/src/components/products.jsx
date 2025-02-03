@@ -1,14 +1,53 @@
-import { IndianRupee } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from "react"
+import { Star, StarHalf, Heart, Eye, ShoppingCart } from "lucide-react"
+
 import{Link} from 'react-router-dom'
-function Products(props) {
+function Products({ initialProducts }) {
+
   { document.title = 'UrbanMart - an E-commarce website for online shopping' }
   const [cartItems, setCartItems] = useState([])
 
-  const handleClick = (item) => {
+
+  const [products, setProducts] = useState(initialProducts)
+  const [favorites, setFavorites] = useState([])
+  const [quickViewProduct, setQuickViewProduct] = useState(null)
+  const [categoryFilter, setCategoryFilter] = useState("All")
+  const [ratingFilter, setRatingFilter] = useState("All")
+
+  const renderRating = (rating) => {
+    const maxStars = 5; // Maximum 5 stars
+    const fullStars = Math.floor(rating)
+    const hasHalfStar = rating % 1 !== 0
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
+
+    const safeFullStars = Math.max(0, Math.min(fullStars, maxStars));
+    const safeEmptyStars = Math.max(0, Math.min(emptyStars, maxStars - safeFullStars));
+
+
+    return (
+      <div className="flex items-center">
+      {[...Array(safeFullStars)].map((_, i) => (
+        <Star key={`full-${i}`} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+      ))}
+      {hasHalfStar && <StarHalf className="w-4 h-4 fill-yellow-400 text-yellow-400" />}
+      {[...Array(safeEmptyStars)].map((_, i) => (
+        <Star key={`empty-${i}`} className="w-4 h-4 text-gray-300" />
+      ))}
+      <span className="ml-1 text-sm text-gray-600">({rating.toFixed(1)})</span>
+    </div>
+    )
+  }
+
+  const toggleFavorite = (productId) => {
+    setFavorites((prev) => (prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]))
+    console.log(favorites)
+  }
+
+
+  const addToCart = (product) => {
     setCartItems((prevCartItems) => {
       // Check if the product is already in the cart
-      const isAlreadyInCart = prevCartItems.some((cartItem) => cartItem.id === item.id);
+      const isAlreadyInCart = prevCartItems.some((cartItem) => cartItem.id === product.id);
   
       if (isAlreadyInCart) {
         console.log("Product is already in the cart");
@@ -16,17 +55,34 @@ function Products(props) {
       }
   
       // Add the new product to the cart
-      const updatedCart = [...prevCartItems, item];
-      console.log(updatedCart); // Log the updated cart
+      const updatedCart = [...prevCartItems, product];
+      console.log(updatedCart);
+       // Log the updated cart
+      alert("item added")
       return updatedCart;
     });
   };
-  
+
+  useEffect(() => {
+    let filteredProducts = initialProducts
+
+    if (categoryFilter !== "All") {
+      filteredProducts = filteredProducts.filter((p) => p.category === categoryFilter)
+    }
+
+    if (ratingFilter !== "All") {
+      filteredProducts = filteredProducts.filter((p) => p.rating >= Number.parseInt(ratingFilter))
+    }
+
+    setProducts(filteredProducts)
+  }, [categoryFilter, ratingFilter, initialProducts])
+
+  const categories = ["All", ...new Set(initialProducts.map((p) => p.category))]
 
   return (
-    <>
-    {/* Floating cart button  */}
-      <Link to={"/mycart"}>
+    <div className="container mx-auto px-4 py-8 text-text">
+       {/* Floating cart button  */}
+       <Link to={"/mycart"}>
       <div 
       title='Viwe Cart'
       className="flex text-text bg-accent outline-red-200 hover:bg-hover transition-all duration-300 ease-in-out p-3 rounded-full fixed z-20 bottom-0 right-0 m-20">
@@ -38,79 +94,103 @@ function Products(props) {
         <span className="absolute -top-14 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 px-3 rounded-lg border border-gray-300  bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">Viwe cart <span> </span></span>
       </div>
         </Link>
-
-      <section className="relative flex col-span-1">
-
-
-        <div className="mx-auto grid w-full gap-8 md:grid-cols-2 lg:grid-cols-3 m-2">
-          {props.productDetail.map((items) => (
-            <div
-              key={items.id}
-              className="flex flex-col items-start gap-4 pb-6 text-text bg-secondary p-5 rounded-lg sm:items-start"
-            >
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-sm md:aspect-[4/3]">
-                <img src={items.image} alt={items.category} />
-              </div>
-              <div className="flex w-full flex-col items-start gap-5 pt-4 md:gap-0 md:pt-0">
-                <div className="rounded-md mb-1 bg-blue-50 px-2 py-1.5 text-sm font-medium uppercase text-blue-600">
-                  <p>{items.category}</p>
-                </div>
-                <p className="mb-3 text-xl font-bold md:text-2xl">
-                  {items.title}
-                </p>
-                <p className="mb-3 text-xl font-bold md:text-xl">
-                  {items.description}
-                </p>
-                <div className="flex w-full  justify-between gap-10 text-gray-100 sm:w-auto md:flex-row lg:items-center">
-                  <p className="text-3xl flex">
-                    <IndianRupee />{items.price}
-                  </p>
-                  <div class="flex items-center mt-4 text-gray-100">
-                    <svg
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="w-6 h-6 fill-current text-yellow-500"
-                    >
-                      <path d="M0 0h24v24H0z" fill="none"></path>
-                      <path
-                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                      ></path>
-                    </svg>
-                    <span class="ml-2">{`${items.rating.rate}(${items.rating.count} reviews)`}</span>
-                  </div>
-                </div>
-
-
-                <div className="flex py-4 w-full justify-between">
-                  <button className="button">
-                    <svg viewBox="0 0 16 16" className="bi bi-cart-check" height={24} width={24} xmlns="http://www.w3.org/2000/svg" fill="#fff">
-                      <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
-                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                    </svg>
-                    <p className="text">Buy Now</p>
-                  </button>
-                  <button class="cartBtn"
-                    onClick={() => handleClick(items)}
-                  >
-                    <svg class="cart" fill="white" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path></svg>
-                    ADD TO CART
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" class="product"><path d="M211.8 0c7.8 0 14.3 5.7 16.7 13.2C240.8 51.9 277.1 80 320 80s79.2-28.1 91.5-66.8C413.9 5.7 420.4 0 428.2 0h12.6c22.5 0 44.2 7.9 61.5 22.3L628.5 127.4c6.6 5.5 10.7 13.5 11.4 22.1s-2.1 17.1-7.8 23.6l-56 64c-11.4 13.1-31.2 14.6-44.6 3.5L480 197.7V448c0 35.3-28.7 64-64 64H224c-35.3 0-64-28.7-64-64V197.7l-51.5 42.9c-13.3 11.1-33.1 9.6-44.6-3.5l-56-64c-5.7-6.5-8.5-15-7.8-23.6s4.8-16.6 11.4-22.1L137.7 22.3C155 7.9 176.7 0 199.2 0h12.6z"></path></svg>
-                  </button>
-                </div>
-
-
-              </div>
-            </div>
+        {/* Category and rating filters */}
+      <h1 className="text-3xl font-bold mb-8">Our Products</h1>
+      <div className="flex justify-between mb-4  text-text">
+        <select
+          className="p-2 border rounded bg-secondary"
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+        >
+          <option value="All">All Categories</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
           ))}
+        </select>
+        <select className="p-2 border rounded bg-secondary text-text" value={ratingFilter} onChange={(e) => setRatingFilter(e.target.value)}>
+          <option value="All">All Ratings</option>
+          <option value="4">4+ Stars</option>
+          <option value="3">3+ Stars</option>
+          <option value="2">2+ Stars</option>
+          <option value="1">1+ Star</option>
+        </select>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {products.map((product) => (
+          
+          <div key={product.id} className="border rounded-lg text-text bg-secondary shadow-md flex flex-col">
+            <div className="relative">
+              <img
+                src={product.image || `/placeholder.svg?height=200&width=200`}
+                alt={product.name}
+                className="w-full h-48 object-cover rounded-t-lg"
+              />
+              <button
+                className="absolute top-2 right-2 p-1 bg-white rounded-full"
+                onClick={() => toggleFavorite(product.id)}
+              >
+                <Heart className={favorites.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-500"} />
+              </button>
+            </div>
+            <div className="p-4 flex-grow">
+              <div className="flex justify-between items-start mb-2">
+                <h2 className="text-xl font-semibold">{product.title}</h2>
+                <span className="px-2 py-1 bg-accent text-text text-sm rounded">{product.category}</span>
+              </div>
+              <p className="text-gray-600 mb-2">{product.description}</p>
+              <div className="mb-2">{renderRating(product.rating.rate)}</div>
+              <p className="text-lg font-bold">₹{product.price.toFixed(2)}</p>
+            </div>
+            <div className="p-4 flex justify-between">
+              <button className="p-2 border rounded" onClick={() => setQuickViewProduct(product)}>
+                <Eye className="w-4 h-4" />
+              </button>
+              <button
+                className="flex-grow ml-2 bg-blue-500 text-white p-2 rounded flex items-center justify-center"
+                onClick={() => addToCart(product)}
+              >
+                <ShoppingCart className="w-4 h-4 mr-2" />
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      {quickViewProduct && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+          <div className="bg-primary p-6 rounded-lg max-w-md w-full">
+            <h2 className="text-2xl font-bold mb-4">{quickViewProduct.title}</h2>
+            <img
+              src={quickViewProduct.image || `/placeholder.svg?height=300&width=300`}
+              alt={quickViewProduct.name}
+              className="w-full h-64 object-cover rounded-lg mb-4"
+            />
+            <p className="mb-4">{quickViewProduct.description}</p>
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-lg font-bold">₹{quickViewProduct.price.toFixed(2)}</span>
+              {renderRating(quickViewProduct.rating.rate)}
+            </div>
+            <button
+              className="w-full bg-blue-500 text-white p-2 rounded flex items-center justify-center"
+              onClick={() => {
+                addToCart(quickViewProduct)
+                setQuickViewProduct(null)
+              }}
+            >
+              <ShoppingCart className="w-4 h-4 mr-2" />
+              Add to Cart
+            </button>
+            <button className="w-full mt-2 border p-2 rounded" onClick={() => setQuickViewProduct(null)}>
+              Close
+            </button>
+          </div>
         </div>
-      </section>
-
-
-
-
-    </>
-
+      )}
+    </div>
   )
 }
+
 
 export default Products
