@@ -12,6 +12,7 @@ const SignIn = lazy(() => import("./components/SignIn"));
 const NotFound = lazy(() => import("./components/404"));
 const UserProfile = lazy(() => import("./components/UserProfile"));
 const ShoppingCart = lazy(() => import("./components/ShoppingCart"));
+const Wishlist = lazy(() => import("./components/Wishlist"));
 
 import AdminPanel from "./components/Admin/AdminPanel";
 const AddProduct = lazy(() => import("./components/Admin/AddProduct"));
@@ -582,6 +583,23 @@ const router = createBrowserRouter([
             <NavBar />
             <Suspense fallback={<Loader />}>
               <ShoppingCart />
+            </Suspense>
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/wishlist",
+    element: <ProtectedRoute />, // 👈 Wrap with ProtectedRoute
+    children: [
+      {
+        path: "",
+        element: (
+          <>
+            <NavBar />
+            <Suspense fallback={<Loader />}>
+            <Wishlist/>
             </Suspense>
           </>
         ),
