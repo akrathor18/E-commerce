@@ -1,7 +1,7 @@
-import { React, useState, Suspense, lazy } from "react";
+import { React, useState , lazy } from "react";
 import { UserCog, Users, Plus, House, Shuffle, AlignJustify } from 'lucide-react';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { BrowserRouter, Routes, Route, useLocation,Link, Outlet } from "react-router-dom";
+import {NavLink , Outlet } from "react-router-dom";
 import logo from "../../assets/logo.png"
 
 
@@ -20,52 +20,69 @@ const AdminPanel = () => {
           </h2>
         </a>
         <ul className="mt-4">
-          <span className="text-accent font-bold">ADMIN</span>
+          <span className= "text-accent font-bold">ADMIN</span>
           <li className="mb-1 group">
-            <Link
+            <NavLink
               to={"./dashboard"}
-              className="flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.active]:bg-hover group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
+              className={({ isActive }) =>
+                isActive
+                  ? "flex font-semibold items-center py-2 px-4 text-text bg-secondary rounded-md bg-hover text-white"
+                  : "flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
+              }
+              
             >
               <i className="ri-home-2-line mr-3 text-lg"></i>
               <House />
               <span className="text-sm pl-3">Dashboard</span>
-            </Link>
+            </NavLink>
           </li>
           <li className="mb-1 group">
-            <Link
+            <NavLink
               to={'./addproduct'}
-              className="flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.active]:bg-hover group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle"
+              className={({ isActive }) =>
+                isActive
+                  ? "flex font-semibold items-center py-2 px-4 text-text bg-secondary rounded-md bg-hover text-white"
+                  : "flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
+              }
             >
               <i className="bx bx-user mr-3 text-lg"></i>
               <Plus />
               <span className="text-sm pl-2">Add Products</span>
               <i className="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-            </Link>
+            </NavLink>
 
           </li>
           <li className="mb-1 group">
-            <Link
+            <NavLink
               to="./orders"
-              className="flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.active]:bg-hover group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle"
+              className={({ isActive }) =>
+                isActive
+                  ? "flex font-semibold items-center py-2 px-4 text-text bg-secondary rounded-md bg-hover text-white"
+                  : "flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
+              }
             >
               <i className="bx bx-user mr-3 text-lg"></i>
               <Shuffle />
               <span className="text-sm pl-3">Oders</span>
               <i className="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-            </Link>
+            </NavLink>
 
           </li>
           <li className="mb-1 group">
-            <Link
+            <NavLink
               to="ProductManagement"
-              className="flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.active]:bg-hover group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle"
+              className={({ isActive }) =>
+                isActive
+                  ? "flex font-semibold items-center py-2 px-4 text-text bg-secondary rounded-md bg-hover text-white"
+                  : "flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
+              }
             >
               <i className="bx bx-user mr-3 text-lg"></i>
               <Users />
               <span className="text-sm pl-3">
                 Product Managment</span>
               <i className="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-            </Link>
+            </NavLink>
 
           </li>
           {/* Add other sidebar items similarly */}
@@ -112,12 +129,12 @@ const AdminPanel = () => {
                       </a>
                     </MenuItem>
                     <MenuItem>
-                      <Link
+                      <NavLink
                         to={"/signup"}
                         className="block px-4 py-2 text-sm  data-[focus]:bg-primary hover:text-hover data-[focus]:outline-none"
                       >
                         Loguot
-                      </Link>
+                      </NavLink>
                     </MenuItem>
 
                   </MenuItems>

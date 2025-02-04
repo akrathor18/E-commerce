@@ -3,6 +3,8 @@ import {  createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import Loader from "./components/Loader";
 import NavBar from "./components/navBar";
+// import { BrowserRouter, Routes, Route, useLocation, Link, Outlet } from "react-router-dom";
+import ProtectedRoute from './auth/ProtectedRoute'
 // Lazy-loaded components
 const SignUp = lazy(() => import("./components/SignUp"));
 const Products = lazy(() => import("./components/products"));
@@ -516,109 +518,127 @@ const App = () => {
   
   
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: (
-        <>
-          <NavBar />
-          <Suspense fallback={<Loader />}>
-            <Products initialProducts={productDetail} />
-          </Suspense>
-        </>
-      ),
-    },
-    {
-      path: "/signin",
-      element: (
-        <>
-          <NavBar />
-          <Suspense fallback={<Loader />}>
-            <SignIn />
-          </Suspense>
-        </>
-      ),
-    },
-    {
-      path: "/signup",
-      element: (
-        <>
-          <NavBar />
-          <Suspense fallback={<Loader />}>
-            <SignUp />
-          </Suspense>
-        </>
-      ),
-    },
-    {
-      path: "/profile",
-      element: (
-        <>
-          <NavBar />
-          <Suspense fallback={<Loader />}>
-            <UserProfile />
-          </Suspense>
-        </>
-      ),
-    },
-    {
-      path: "/Mycart",
-      element: (
-        <>
-          <NavBar />
-          <Suspense fallback={<Loader />}>
-            <ShoppingCart />
-          </Suspense>
-        </>
-      ),
-    },
-    {
-      path: "*",
-      element: <NotFound />,
-    },
-    {
-      path: "/admin",
-      element: (
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <>
+        <NavBar />
         <Suspense fallback={<Loader />}>
-          <AdminPanel />
+          <Products initialProducts={productDetail} />
         </Suspense>
-      ),
-      children: [
-        {
-          path: "addproduct",
-          element: (
+      </>
+    ),
+  },
+  {
+    path: "/signin",
+    element: (
+      <>
+        <NavBar />
+        <Suspense fallback={<Loader />}>
+          <SignIn />
+        </Suspense>
+      </>
+    ),
+  },
+  {
+    path: "/signup",
+    element: (
+      <>
+        <NavBar />
+        <Suspense fallback={<Loader />}>
+          <SignUp />
+        </Suspense>
+      </>
+    ),
+  },
+
+  // Protect user profile & cart routes
+  {
+    path: "/profile",
+    element: <ProtectedRoute />, // 👈 Wrap with ProtectedRoute
+    children: [
+      {
+        path: "",
+        element: (
+          <>
+            <NavBar />
             <Suspense fallback={<Loader />}>
-              <AddProduct />
+              <UserProfile />
             </Suspense>
-          ),
-        },
-        {
-          path: "dashboard",
-          element: (
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/Mycart",
+    element: <ProtectedRoute />, // 👈 Wrap with ProtectedRoute
+    children: [
+      {
+        path: "",
+        element: (
+          <>
+            <NavBar />
             <Suspense fallback={<Loader />}>
-              <Dashboard />
+              <ShoppingCart />
             </Suspense>
-          ),
-        },
-        {
-          path: "orders",
-          element: (
-            <Suspense fallback={<Loader />}>
-              <Orders />
-            </Suspense>
-          ),
-        },
-        {
-          path: "ProductManagement",
-          element: (
-            <Suspense fallback={<Loader />}>
-              <ProductManagement />
-            </Suspense>
-          ),
-        },
-      ],
-    },
-  ]);
+          </>
+        ),
+      },
+    ],
+  },
+
+  {
+    path: "*",
+    element: <NotFound />,
+  },
+
+  // Protect admin routes
+  {
+    path: "/admin",
+    element:(
+      <>
+       <AdminPanel/>
+      </>
+    ), // 👈 Wrap with ProtectedRoute
+    children: [
+      {
+        path: "addproduct",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <AddProduct />
+          </Suspense>
+        ),
+      },
+      {
+        path: "dashboard",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Dashboard />
+          </Suspense>
+        ),
+      },
+      {
+        path: "orders",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Orders />
+          </Suspense>
+        ),
+      },
+      {
+        path: "ProductManagement",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <ProductManagement />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+]);
+
 
   return (
     <>
