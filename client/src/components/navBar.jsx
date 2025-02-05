@@ -4,6 +4,7 @@ import logo from '../assets/logo.png'
 import { useState, memo } from 'react'
 import SearchBar from './searchBar'
 import { Link } from 'react-router-dom'
+import { UserPen , Heart, LogIn  } from 'lucide-react';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -69,17 +70,25 @@ function classNames(...classes) {
                 <MenuItem>
                   <Link
                     to={"/profile"}
-                    className="block px-4 py-2 text-sm  data-[focus]:bg-primary hover:text-hover data-[focus]:outline-none"
+                    className=" flex gap-2 px-4 py-2 text-sm  data-[focus]:bg-primary hover:text-hover data-[focus]:outline-none"
                   >
-                    Your Profile
+                   <UserPen className='w-5' /> Your Profile
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link
+                   to={"/wishlist"}
+                    className="flex gap-2 px-4 py-2 text-sm  data-[focus]:bg-primary hover:text-hover data-[focus]:outline-none"
+                  >
+                  <Heart fill='none' className='w-5'/>  Whish List
                   </Link>
                 </MenuItem>
                 <MenuItem>
                   <Link
                    to={"/signup"}
-                    className="block px-4 py-2 text-sm  data-[focus]:bg-primary hover:text-hover data-[focus]:outline-none"
+                    className="flex gap-2 px-4 py-2 text-sm  data-[focus]:bg-primary hover:text-hover data-[focus]:outline-none"
                   >
-                    sign-in
+                   <LogIn className='w-5'/> sign-in
                   </Link>
                 </MenuItem>
 

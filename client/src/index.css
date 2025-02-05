@@ -238,3 +238,27 @@ body{
   animation: float 6s ease-in-out infinite;
 }
 
+
+/* Scroll Bar  */
+/* width *//* Hide scrollbar but allow scrolling */
+::-webkit-scrollbar {
+  width: 10px; /* Small width for a minimal look */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none; /* Primary color */
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #303030; /* Secondary color */
+  border-radius: 10px;
+  border: 2px solid #121212; /* Blends well with track */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #4CAF50; /* Accent color for a subtle hover effect */
+}

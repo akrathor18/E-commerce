@@ -3,7 +3,8 @@ import { useState } from "react"
 
 const Wishlist = () => {
   {document.title='My WishList'}
-  const [products, setProducts] = useState([{
+  const [products, setProducts] = useState([
+    {
     "id": 5,
     "title": "Adjustable Dumbbells",
     "price": 2499,
@@ -35,7 +36,7 @@ const Wishlist = () => {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h2 className="text-3xl font-bold mb-6 text-gray-100 flex items-center">
-        <Heart className="mr-2" /> Your Wishlist
+        <Heart fill="red" className="mr-2 text-red-600" /> Your Wishlist
       </h2>
       <ul className="space-y-4">
         {products.map((product) => (

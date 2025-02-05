@@ -10,9 +10,9 @@ const SignUp = lazy(() => import("./components/SignUp"));
 const Products = lazy(() => import("./components/products"));
 const SignIn = lazy(() => import("./components/SignIn"));
 const NotFound = lazy(() => import("./components/404"));
-const UserProfile = lazy(() => import("./components/UserProfile"));
-const ShoppingCart = lazy(() => import("./components/ShoppingCart"));
-const Wishlist = lazy(() => import("./components/Wishlist"));
+const UserProfile = lazy(() => import("./components/User/UserProfile"));
+const ShoppingCart = lazy(() => import("./components/User/ShoppingCart"));
+const Wishlist = lazy(() => import("./components/User/Wishlist"));
 
 import AdminPanel from "./components/Admin/AdminPanel";
 const AddProduct = lazy(() => import("./components/Admin/AddProduct"));

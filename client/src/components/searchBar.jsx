@@ -459,11 +459,11 @@ function searchBar() {
   return(
     <div className="relative ml-3">
           {/* Search bar */}
-          <div className="flex items-center border md:w-96 w-80 focus-within:border-hover transition duration-300 pr-3 gap-1 bg-secondary border-gray-500/30 h-[35px] rounded-[5px] overflow-hidden">
+          <div className="flex items-center border md:w-96 w-80  transition duration-300 pr-3 gap-1 bg-secondary border-gray-500/30 h-[35px] rounded-[5px] overflow-hidden">
             <input
               type="text"
               placeholder="Search for products"
-              className="w-full h-full pl-4 outline-none placeholder-gray-500 text-sm"
+              className="w-full bg-primary text-text h-full pl-4 outline-none placeholder-gray-400 text-sm"
               value={searchQuery}
               onChange={handleSearch}
             />
