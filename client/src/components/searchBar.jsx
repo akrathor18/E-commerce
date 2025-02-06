@@ -483,7 +483,7 @@ function searchBar() {
           {/* Search results dropdown */}
           {searchResults.length > 0 && (
             <div className="absolute z-10 mt-1 w-full bg-white shadow-lg rounded-lg">
-              <ul className="py-1 text-sm text-text bg-secondary  overflow-y-scroll"
+              <ul className="py-1 text-sm text-text border bg-secondary  overflow-y-scroll"
               style={{ maxHeight: "55vh" }}>
                 {searchResults.map((result, index) => (
                   <li

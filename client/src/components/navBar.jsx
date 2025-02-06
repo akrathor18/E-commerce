@@ -6,10 +6,6 @@ import SearchBar from './searchBar'
 import { Link } from 'react-router-dom'
 import { UserPen , Heart, LogIn  } from 'lucide-react';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
  function NavBar() {
 
 
@@ -21,7 +17,7 @@ function classNames(...classes) {
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             {/* Mobile menu button*/}
 
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-text hover:text-hover hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-text hover:text-hover focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
               <Bars3Icon aria-hidden="true" className="block size-6 group-data-[open]:hidden" />
@@ -52,9 +48,9 @@ function classNames(...classes) {
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
             {/* ------------------------------------Profile dropdown */}
-            <Menu as="div" className="relative ml-3">
+            <Menu as="div" className="relative ml-3 ">
               <div>
-                <MenuButton className="relative flex rounded-full bg-gray-100 text-2xl focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <MenuButton className="relative flex rounded-full bg-gray-100 text-2xl ">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="#FF9800" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-10">
@@ -65,7 +61,7 @@ function classNames(...classes) {
               </div>
               <MenuItems
                 transition
-                className="absolute right-0 z-10 mt-2 w-52 origin-top-right rounded-md bg-secondary text-text py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                className="absolute right-0 z-10 mt-2 w-52 origin-top-right rounded-md border-text border bg-secondary text-text py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
               >
                 <MenuItem>
                   <Link
