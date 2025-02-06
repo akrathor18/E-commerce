@@ -2,30 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+
 * {
+ 
     margin: 0;
     padding: 0;
+    font-family: 'Inter', sans-serif;
+
 }
 
 body{
     background: #121212;
 }
 
-.SecondaryBg {
-    background: #1E1E1E;
-}
-
-.AccentColor {
-    background: #4CAF50;
-}
-
-.TextColor {
-    background: #E0E0E0;
-}
-
-.Highlight {
-    background: #FF9800;
-}
 
 
 .button {
