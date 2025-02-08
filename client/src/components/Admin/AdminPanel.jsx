@@ -26,7 +26,7 @@ const AdminPanel = () => {
               to={"./dashboard"}
               className={({ isActive }) =>
                 isActive
-                  ? "flex font-semibold items-center py-2 px-4 text-text bg-secondary rounded-md bg-hover text-white"
+                  ? "flex font-semibold items-center py-2 px-4 text-text  rounded-md bg-hover"
                   : "flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
               }
               
@@ -41,7 +41,7 @@ const AdminPanel = () => {
               to={'./addproduct'}
               className={({ isActive }) =>
                 isActive
-                  ? "flex font-semibold items-center py-2 px-4 text-text bg-secondary rounded-md bg-hover text-white"
+                  ? "flex font-semibold items-center py-2 px-4 text-text  rounded-md bg-hover"
                   : "flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
               }
             >
@@ -57,7 +57,7 @@ const AdminPanel = () => {
               to="./orders"
               className={({ isActive }) =>
                 isActive
-                  ? "flex font-semibold items-center py-2 px-4 text-text bg-secondary rounded-md bg-hover text-white"
+                  ? "flex font-semibold items-center py-2 px-4 text-text  rounded-md bg-hover"
                   : "flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
               }
             >
@@ -73,7 +73,7 @@ const AdminPanel = () => {
               to="ProductManagement"
               className={({ isActive }) =>
                 isActive
-                  ? "flex font-semibold items-center py-2 px-4 text-text bg-secondary rounded-md bg-hover text-white"
+                  ? "flex font-semibold items-center py-2 px-4 text-text  rounded-md bg-hover"
                   : "flex font-semibold items-center py-2 px-4 text-text bg-secondary hover:text-hover rounded-md group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
               }
             >
