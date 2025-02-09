@@ -34,6 +34,9 @@ dist-ssr
 .runtimeconfig.json
 .firebase/
 
+data.text
+
+
 ### Node ###
 # Logs
 logs
