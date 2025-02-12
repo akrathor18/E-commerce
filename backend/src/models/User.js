@@ -1,6 +1,5 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs"
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -24,19 +23,23 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "admin"],
       default: "user",
     },
-    addresses: [
+    address: {
+      type: String,
+      required: [true, "Address is required"],
+    },
+    wishlist: [
       {
-        street: String,
-        city: String,
-        state: String,
-        country: String,
-        zipCode: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product", // 
       },
     ],
-    wishlist: [],
     cart: [
       {
-        
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Product",
+          required: true,
+        }
       },
     ],
   },
@@ -58,4 +61,4 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = User;
+export default User;
