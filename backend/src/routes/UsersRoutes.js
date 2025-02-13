@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken'
-
+import VerifyJwtMiddleware from "../Middleware/VerifyJwtMiddleware.js";
 function generateSessionId(user, res) {
   const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "7d", // Token expires in 7 days
@@ -48,8 +48,22 @@ router.post("/register", async (req, res) => {
     res.status(500).json('Internal server error')
   }
 });
-router.get("/profile", (req, res) => {
-  res.json({ message: "User profile data" });
+router.get("/profile", VerifyJwtMiddleware, async (req, res) => {
+  try {
+    res.status(200).json(req.user);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.post("/logout", (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+
+  res.status(200).json({ message: "Logged out successfully!" });
 });
 
 
