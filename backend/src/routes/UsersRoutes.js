@@ -13,6 +13,7 @@ function generateSessionId(user, res) {
     sameSite: "strict",
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
+  console.log(token)
 }
 router.post("/register", async (req, res) => {
   try {
@@ -31,8 +32,21 @@ router.post("/register", async (req, res) => {
     res.status(500).json(`Internal server error`)
 }
 });
- router.get("/login", (req, res) => {
-  res.json({ message: "User logged in successfully" });
+ router.post("/login", async (req, res) => {
+  try {
+    const {email, password} = req.body;
+    const userLogin = await User.findOne({ email });
+
+    if (!userLogin) return res.status(404).json('User not found');
+    const isMatch = await userLogin.comparePassword(password);
+    if (!isMatch) return res.status(400).json('Invalid credentials');
+    generateSessionId(userLogin, res);
+    res.json({ message: 'User logged in successfully' });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json('Internal server error')
+  }
 });
 router.get("/profile", (req, res) => {
   res.json({ message: "User profile data" });
