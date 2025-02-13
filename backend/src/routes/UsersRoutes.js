@@ -67,6 +67,58 @@ router.post("/logout", (req, res) => {
 });
 
 
+router.post("/cart", VerifyJwtMiddleware, async (req, res) => {
+  try {
+    const { productId } = req.body; 
+
+    if (!productId) {
+      return res.status(400).json({ message: "Product ID is required" });
+    }
+
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.cart.push({ product: productId }); 
+    await user.save();
+
+    res.status(200).json({ message: "Product added to cart", cart: user.cart });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+});
+
+router.delete("/cart/:productId", VerifyJwtMiddleware, async (req, res) => {
+  try {
+    const { productId } = req.params; // ✅ Get productId from URL params
+
+    // Check if productId is provided
+    if (!productId) {
+      return res.status(400).json({ message: "Product ID is required" });
+    }
+
+    // Find the user
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Remove the product from the cart using MongoDB's $pull operator
+    user.cart = user.cart.filter(item => item.product.toString() !== productId);
+    await user.save();
+
+    res.status(200).json({ message: "Product removed from cart", cart: user.cart });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+});
+
+
+
+
 
 
 export default router;
