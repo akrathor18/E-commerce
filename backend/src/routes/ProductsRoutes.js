@@ -2,8 +2,9 @@ import express from 'express'
 
 const router = express.Router();
 import Products from '../models/Products.js';
+import authMiddleware from '../Middleware/authMiddleware';
 
-router.post('/addProducts', async (req, res) => {
+router.post('/addProducts',authMiddleware,async (req, res) => {
     try {
         const product = req.body;
         console.log(product);

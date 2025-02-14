@@ -3,6 +3,8 @@ const router = express.Router();
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken'
 import VerifyJwtMiddleware from "../Middleware/VerifyJwtMiddleware.js";
+import authMiddleware from "../Middleware/authMiddleware";
+
 function generateSessionId(user, res) {
   const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "7d", // Token expires in 7 days
@@ -48,13 +50,6 @@ router.post("/register", async (req, res) => {
     res.status(500).json('Internal server error')
   }
 });
-router.get("/profile", VerifyJwtMiddleware, async (req, res) => {
-  try {
-    res.status(200).json(req.user);
-  } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
 
 router.post("/logout", (req, res) => {
   res.clearCookie("token", {
@@ -66,8 +61,15 @@ router.post("/logout", (req, res) => {
   res.status(200).json({ message: "Logged out successfully!" });
 });
 
+router.get("/profile",authMiddleware, VerifyJwtMiddleware, async (req, res) => {
+  try {
+    res.status(200).json(req.user);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
-router.post("/cart", VerifyJwtMiddleware, async (req, res) => {
+router.post("/cart",authMiddleware ,VerifyJwtMiddleware, async (req, res) => {
   try {
     const { productId } = req.body; 
 
@@ -88,7 +90,7 @@ router.post("/cart", VerifyJwtMiddleware, async (req, res) => {
     res.status(500).json({ message: "Internal server error", error });
   }
 });
-router.delete("/cart/:productId", VerifyJwtMiddleware, async (req, res) => {
+router.delete("/cart/:productId",authMiddleware,VerifyJwtMiddleware, async (req, res) => {
   try {
     const { productId } = req.params;
     if (!productId) {
@@ -109,10 +111,5 @@ router.delete("/cart/:productId", VerifyJwtMiddleware, async (req, res) => {
     res.status(500).json({ message: "Internal server error", error });
   }
 });
-
-
-
-
-
 
 export default router;

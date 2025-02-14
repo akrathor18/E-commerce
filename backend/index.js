@@ -3,9 +3,10 @@ import mongoose from "mongoose";
 import db from "./src/config/db.js";
 import UserRoutes from './src/routes/UsersRoutes.js'
 import bodyParser from "body-parser";
-import ProductsRoutes from './src/routes/ProductsRoutes.js'
-
 import cookieParser from "cookie-parser"; 
+
+import ProductsRoutes from './src/routes/ProductsRoutes.js'
+import authMiddleware from "./src/Middleware/authMiddleware";
 
 const port = process.env.PORT || 3000;
 const app = express()
