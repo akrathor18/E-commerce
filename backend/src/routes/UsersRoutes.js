@@ -4,7 +4,7 @@ import User from '../models/User.js';
 import jwt from 'jsonwebtoken'
 import VerifyJwtMiddleware from "../Middleware/VerifyJwtMiddleware.js";
 import authMiddleware from "../Middleware/authMiddleware";
-
+import mongoose from "mongoose";
 function generateSessionId(user, res) {
   const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "7d", // Token expires in 7 days
@@ -90,7 +90,7 @@ router.post("/cart",authMiddleware ,VerifyJwtMiddleware, async (req, res) => {
     res.status(500).json({ message: "Internal server error", error });
   }
 });
-router.delete("/cart/:productId",authMiddleware,VerifyJwtMiddleware, async (req, res) => {
+router.delete("/cartromove/:productId",authMiddleware,VerifyJwtMiddleware, async (req, res) => {
   try {
     const { productId } = req.params;
     if (!productId) {
@@ -106,6 +106,64 @@ router.delete("/cart/:productId",authMiddleware,VerifyJwtMiddleware, async (req,
     await user.save();
 
     res.status(200).json({ message: "Product removed from cart", cart: user.cart });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+});
+
+router.post("/wishlist", authMiddleware, VerifyJwtMiddleware, async (req, res) => {
+  console.log(req.body);
+  try {
+    const { productId } = req.body;
+    console.log(productId);
+
+    if (!productId) {
+      return res.status(400).json({ message: "Product ID is required" });
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: "Invalid Product ID" });
+    }
+
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const productObjectId = new mongoose.Types.ObjectId(productId); // Convert to ObjectId
+
+    // Prevent duplicate wishlist entries
+    if (user.wishlist.includes(productObjectId)) {
+      return res.status(400).json({ message: "Product already in wishlist" });
+    }
+
+    user.wishlist.push(productObjectId); // ✅ Correct way to push an ObjectId
+    await user.save();
+
+    res.status(200).json({ message: "Product added to wishlist", wishlist: user.wishlist });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+});
+
+router.delete("/wishlistromove/:productId",authMiddleware,VerifyJwtMiddleware, async (req, res) => {
+  try {
+    const { productId } = req.params;
+    if (!productId) {
+      return res.status(400).json({ message: "Product ID is required" });
+    }
+
+    // Find the user
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    user.wishlist = user.wishlist.filter(item => item.toString() !== productId);
+    await user.save();
+
+    res.status(200).json({ message: "Product removed from wishlist", cart: user.wishlist });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error", error });
