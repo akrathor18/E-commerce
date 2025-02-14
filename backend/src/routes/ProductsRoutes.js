@@ -31,10 +31,8 @@ router.get('/getProducts', async (req, res) => {
 )
 
 router.get("/search", async (req, res) => {
-    console.log(req.query)
     try {
         const { searchTerm } = req.query;
-            console.log(searchTerm)
         if (!searchTerm) {
             return res.status(400).json({ message: "Search term is required" });
         }
