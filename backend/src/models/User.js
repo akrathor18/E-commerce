@@ -13,6 +13,14 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"],
     },
+    phone: {
+      type: String,
+      required: [true, "Phone number is required"],
+      match: [
+        /^\+?[1-9]\d{1,14}$/,
+        "Please enter a valid phone number",
+      ],
+    },
     password: {
       type: String,
       required: [true, "Password is required"],
@@ -42,6 +50,12 @@ const userSchema = new mongoose.Schema(
         }
       },
     ],
+    orders: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order", 
+      },
+    ]
   },
   { timestamps: true }
 );

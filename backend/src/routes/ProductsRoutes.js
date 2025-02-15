@@ -1,8 +1,7 @@
 import express from 'express'
-
-const router = express.Router();
 import Products from '../models/Products.js';
-import authMiddleware from '../Middleware/authMiddleware';
+import authMiddleware from '../Middleware/authMiddleware.js';
+const router = express.Router();
 
 router.post('/addProducts', authMiddleware, async (req, res) => {
     try {

@@ -3,7 +3,7 @@ const router = express.Router();
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken'
 import VerifyJwtMiddleware from "../Middleware/VerifyJwtMiddleware.js";
-import authMiddleware from "../Middleware/authMiddleware";
+import authMiddleware from "../Middleware/authMiddleware.js";
 import mongoose from "mongoose";
 function generateSessionId(user, res) {
   const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
@@ -131,14 +131,14 @@ router.post("/wishlist", authMiddleware, VerifyJwtMiddleware, async (req, res) =
       return res.status(404).json({ message: "User not found" });
     }
 
-    const productObjectId = new mongoose.Types.ObjectId(productId); // Convert to ObjectId
+    const productObjectId = new mongoose.Types.ObjectId(productId); 
 
     // Prevent duplicate wishlist entries
     if (user.wishlist.includes(productObjectId)) {
       return res.status(400).json({ message: "Product already in wishlist" });
     }
 
-    user.wishlist.push(productObjectId); // ✅ Correct way to push an ObjectId
+    user.wishlist.push(productObjectId); 
     await user.save();
 
     res.status(200).json({ message: "Product added to wishlist", wishlist: user.wishlist });

@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser"; 
 
 import ProductsRoutes from './src/routes/ProductsRoutes.js'
-import authMiddleware from "./src/Middleware/authMiddleware";
+import OrderRoutes from './src/routes/OrderRoutes.js'
 
 const port = process.env.PORT || 3000;
 const app = express()
@@ -18,6 +18,7 @@ app.use(cookieParser());
 
 app.use('/api/product',(ProductsRoutes));
 app.use('/api/users',(UserRoutes));
+app.use('/api/orders',(OrderRoutes));
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
