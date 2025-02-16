@@ -52,22 +52,28 @@ const userSchema = new mongoose.Schema(
     ],
     orders: [
       {
-        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-        products: [
-          {
-            productId: mongoose.Schema.Types.ObjectId,
-            title: String,
-            price: Number,
-            image: String,
-            quantity: Number,
-          },
-        ],
-        totalAmount: Number,
-        createdAt: { type: Date, default: Date.now },
+        user: { 
+          userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Corrected field name
+          name: { type: String, required: true },
+          email: { type: String, required: true },
+          address: { type: String, required: true },
+        },
+        
+  products: [
+  {
+    productId: mongoose.Schema.Types.ObjectId,
+    title: String,
+    price: Number,
+    image: String,
+    quantity: Number,
+  },
+],
+  totalAmount: Number,
+  createdAt: { type: Date, default: Date.now },
       },
     ],
   },
-  { timestamps: true }
+{ timestamps: true }
 );
 
 // Hash password before saving
