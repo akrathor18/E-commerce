@@ -6,7 +6,6 @@ const router = express.Router();
 router.post('/addProducts', authMiddleware, async (req, res) => {
     try {
         const product = req.body;
-        console.log(product);
 
         const newProduct = new Products(product);
         await newProduct.save();

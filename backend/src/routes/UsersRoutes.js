@@ -15,7 +15,6 @@ function generateSessionId(user, res) {
     sameSite: "strict",
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
-  console.log(token)
 }
 router.post("/register", async (req, res) => {
   try {
@@ -28,7 +27,7 @@ router.post("/register", async (req, res) => {
     const resp = await newUser.save()
     generateSessionId(newUser, res);
     res.status(201).json('User resgister successfully!')
-    console.log(resp)
+    
 } catch (error) {
     console.log(error)
     res.status(500).json(`Internal server error`)
@@ -113,10 +112,9 @@ router.delete("/cartromove/:productId",authMiddleware,VerifyJwtMiddleware, async
 });
 
 router.post("/wishlist", authMiddleware, VerifyJwtMiddleware, async (req, res) => {
-  console.log(req.body);
+
   try {
     const { productId } = req.body;
-    console.log(productId);
 
     if (!productId) {
       return res.status(400).json({ message: "Product ID is required" });

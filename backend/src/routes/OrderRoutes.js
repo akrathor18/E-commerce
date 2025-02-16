@@ -32,11 +32,10 @@ router.post('/addOrder', authMiddleware,VerifyJwtMiddleware, async (req, res) =>
           products: productDetails,
           totalAmount,
         });
-    
         const savedOrder = await newOrder.save();
     
         // Add order to user document
-        await User.findByIdAndUpdate(userId, { $push: { orders: savedOrder._id } });
+        await User.findByIdAndUpdate(userId, { $push: { orders: savedOrder  } });
     
         res.status(201).json({ message: "Order placed successfully!", order: savedOrder });
       } catch (error) {

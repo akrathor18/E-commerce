@@ -52,10 +52,20 @@ const userSchema = new mongoose.Schema(
     ],
     orders: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Order", 
+        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        products: [
+          {
+            productId: mongoose.Schema.Types.ObjectId,
+            title: String,
+            price: Number,
+            image: String,
+            quantity: Number,
+          },
+        ],
+        totalAmount: Number,
+        createdAt: { type: Date, default: Date.now },
       },
-    ]
+    ],
   },
   { timestamps: true }
 );
