@@ -13,6 +13,8 @@ const NotFound = lazy(() => import("./components/404"));
 const UserProfile = lazy(() => import("./components/User/UserProfile"));
 const ShoppingCart = lazy(() => import("./components/User/ShoppingCart"));
 const Wishlist = lazy(() => import("./components/User/Wishlist"));
+const CheckoutPage = lazy(() => import("./components/User/checkout-page"));
+const OrderConfirmationPage = lazy(() => import("./components/User/order-confirmation-page"));
 
 import AdminPanel from "./components/Admin/AdminPanel";
 const AddProduct = lazy(() => import("./components/Admin/AddProduct"));
@@ -600,6 +602,40 @@ const router = createBrowserRouter([
             <NavBar />
             <Suspense fallback={<Loader />}>
             <Wishlist/>
+            </Suspense>
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/checkout",
+    element: <ProtectedRoute />, // 👈 Wrap with ProtectedRoute
+    children: [
+      {
+        path: "",
+        element: (
+          <>
+            <NavBar />
+            <Suspense fallback={<Loader />}>
+            <CheckoutPage/>
+            </Suspense>
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/orderconfirmation",
+    element: <ProtectedRoute />, // 👈 Wrap with ProtectedRoute
+    children: [
+      {
+        path: "",
+        element: (
+          <>
+            <NavBar />
+            <Suspense fallback={<Loader />}>
+            <OrderConfirmationPage/>
             </Suspense>
           </>
         ),
