@@ -45,10 +45,6 @@ router.post('/addOrder', authMiddleware, VerifyJwtMiddleware, async (req, res) =
     console.log("newOrder",newOrder)
 
     const savedOrder = await newOrder.save();
-    // const orders = await Order.find().populate("user", "name email address");
-    // console.log(orders);
-
-    // Add order to user document
     await User.findByIdAndUpdate(userId, { $push: { orders: savedOrder } });
 
     res.status(201).json({ message: "Order placed successfully!", order: savedOrder });
