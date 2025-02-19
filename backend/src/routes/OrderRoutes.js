@@ -66,4 +66,28 @@ router.get('/getOrders', authMiddleware, VerifyJwtMiddleware, async (req, res) =
   }
 })
 
+router.put('/updateStatus:id', authMiddleware, VerifyJwtMiddleware, async (req, res)=>{
+  try {
+    const id= req.params.id;
+    const { status } = req.body;  
+    const order = await Order.findById(req.params.id);
+
+    if(!order){
+      res.status(404).json({massage:'Order not found!'})
+    }
+    const validStatuses = ["Pending", "Shipped", "Delivered", "Cancelled"];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ message: "Invalid status" });
+    }
+
+    order.status = status;
+    await order.save();
+
+    res.status(200).json({ message: "Order status updated", order });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: "Failed to update order status", details: error.message })
+  }
+})
+
 export default router
