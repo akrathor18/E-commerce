@@ -111,4 +111,20 @@ router.get('/product/:id', authMiddleware, VerifyJwtMiddleware, async (req, res)
   }
 })
 
+router.get('/user', authMiddleware, VerifyJwtMiddleware, async (req,res)=>{
+  try {
+    const userId = req.user.id;
+  const orders= await Order.find({user:userId}).sort({createdAt:-1})
+
+  if (!orders.length) {
+    return res.status(404).json({ message: "No orders found" });
+  }
+
+  res.status(200).json(orders)
+  
+  } catch (error) {
+    console.log(error)
+    req.status(500).json({massage:'Interna server error'})
+  }
+})
 export default router
