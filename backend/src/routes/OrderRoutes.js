@@ -66,7 +66,7 @@ router.get('/getOrders', authMiddleware, VerifyJwtMiddleware, async (req, res) =
   }
 })
 
-router.put('/updateStatus:id', authMiddleware, VerifyJwtMiddleware, async (req, res)=>{
+router.put('/product/:id', authMiddleware, VerifyJwtMiddleware, async (req, res)=>{
   try {
     const id= req.params.id;
     const { status } = req.body;  
@@ -87,6 +87,27 @@ router.put('/updateStatus:id', authMiddleware, VerifyJwtMiddleware, async (req, 
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: "Failed to update order status", details: error.message })
+  }
+})
+
+router.get('/', authMiddleware, VerifyJwtMiddleware, async (req, res)=>{
+  try {
+    const OrderProducts = await Order.find();
+        res.json(OrderProducts);
+  } catch (error) {
+    console.log(error)
+    res.statues(500).json({massage:"Internal sserver error"})
+  }
+})
+
+router.get('/product/:id', authMiddleware, VerifyJwtMiddleware, async (req, res)=>{
+  try {
+    const id= req.params.id;
+    const productsDetail = await Order.findById(id);
+        res.json(productsDetail);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({massage:"Internal sserver error"})
   }
 })
 
