@@ -7,10 +7,24 @@ const orderSchema = new mongoose.Schema({
       productId: { type: mongoose.Schema.Types.ObjectId, ref: "Products", required: true },
       title: { type: String, required: true },
       price: { type: Number, required: true },
-      image: { type: String }, 
+      image: { type: String },
       quantity: { type: Number, required: true },
     },
   ],
+  userName: {
+    type: String,
+    required: true,
+
+  },
+  userEmail: {
+    type: String,
+    required: true,
+
+  },
+  userAddress: {
+    type: String,
+    required: true,
+  },
   totalAmount: { type: Number, required: true },
   status: {
     type: String,
@@ -19,7 +33,7 @@ const orderSchema = new mongoose.Schema({
   },
   createdAt: { type: Date, default: Date.now },
 },
-{ timestamps: true });
+  { timestamps: true });
 
 const Order = mongoose.model("Order", orderSchema);
 

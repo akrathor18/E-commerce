@@ -38,7 +38,9 @@ router.post('/addOrder', authMiddleware, VerifyJwtMiddleware, async (req, res) =
         email,
         address,
       },
-
+      userName:name,
+      userEmail: email,
+      userAddress: address,
       products: productDetails,
       totalAmount,
     });
