@@ -12,7 +12,6 @@ router.post('/addOrder', authMiddleware, VerifyJwtMiddleware, async (req, res) =
     const { _id, name, email, address, } = req.user;
     const { products, totalAmount } = req.body;
     const userId = req.user.id;
-    console.log("User details:", { _id, name, email, address });
     // Fetch full product details from DB
     const productDetails = await Promise.all(
       products.map(async (item) => {
@@ -38,13 +37,12 @@ router.post('/addOrder', authMiddleware, VerifyJwtMiddleware, async (req, res) =
         email,
         address,
       },
-      userName:name,
+      userName: name,
       userEmail: email,
       userAddress: address,
       products: productDetails,
       totalAmount,
     });
-    console.log("newOrder", newOrder)
 
     const savedOrder = await newOrder.save();
     await User.findByIdAndUpdate(userId, { $push: { orders: savedOrder } });
