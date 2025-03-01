@@ -47,5 +47,45 @@ router.get("/search", async (req, res) => {
     }
 });
 
+// In your backend (e.g., Express route)
+router.get('/filter', async (req, res) => {
+    try {
+        const { category, rating } = req.query;
+
+        let filterConditions = {};
+
+        // If a category is specified, add it to filter
+        if (category && category !== 'All') {
+            filterConditions.category = category;
+        }
+
+        // If a rating is specified, add it to filter
+        if (rating && rating !== 'All') {
+            filterConditions.rating = { $gte: Number.parseInt(rating) };
+        }
+
+        // Find products with the given filters
+        const filteredProducts = await Products.find(filterConditions);
+
+        res.json(filteredProducts);
+    } catch (error) {
+        console.error('Error fetching filtered products:', error);
+        res.status(500).send('Server Error');
+    }
+});
+
+
+router.get('/categories', async (req, res) => {
+    try {
+        // Use MongoDB aggregation to get distinct categories
+        const categories = await Products.distinct("category"); // 'category' is the field you want distinct values for
+
+        res.json(categories); // Send the list of categories back as JSON
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        res.status(500).send('Server Error');
+    }
+});
+
 
 export default router;

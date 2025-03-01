@@ -1,18 +1,62 @@
 import { useState, useEffect } from "react"
 import { Star, StarHalf, Heart, Eye, ShoppingCart } from "lucide-react"
-
+import API from '../config/axios.js'
 import{Link} from 'react-router-dom'
-function Products({ initialProducts }) {
-
+function Products() {
+  
   { document.title = 'UrbanMart - an E-commarce website for online shopping' }
   const [cartItems, setCartItems] = useState([])
-
-
-  const [products, setProducts] = useState(initialProducts)
+  
+  
+  const [products, setProducts] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [favorites, setFavorites] = useState([])
   const [quickViewProduct, setQuickViewProduct] = useState(null)
   const [categoryFilter, setCategoryFilter] = useState("All")
   const [ratingFilter, setRatingFilter] = useState("All")
+  const [categories, setCategories] = useState([])
+  const fetchData = async () => {
+    try {
+      const response = await API.get("/product/getProducts");
+      setProducts(response.data);
+      setFilteredProducts(response.data); // Set filtered products initially
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await API.get("/product/categories"); // Call the new route to get categories
+      setCategories(["All", ...response.data]); // Add 'All' to the categories
+      console.log(response.data)
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    fetchCategories();
+  }, []);
+
+  const fetchFilteredProducts = async () => {
+    try {
+      const response = await API.get("/product/filter", {
+        params: {
+          category: categoryFilter,
+          rating: ratingFilter
+        }
+      });
+      setFilteredProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching filtered products:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchFilteredProducts(); // Apply filters
+  }, [categoryFilter, ratingFilter]); // Only re-fetch when filters change
 
   const renderRating = (rating) => {
     const maxStars = 5; // Maximum 5 stars
@@ -63,21 +107,6 @@ function Products({ initialProducts }) {
     });
   };
 
-  useEffect(() => {
-    let filteredProducts = initialProducts
-
-    if (categoryFilter !== "All") {
-      filteredProducts = filteredProducts.filter((p) => p.category === categoryFilter)
-    }
-
-    if (ratingFilter !== "All") {
-      filteredProducts = filteredProducts.filter((p) => p.rating >= Number.parseInt(ratingFilter))
-    }
-
-    setProducts(filteredProducts)
-  }, [categoryFilter, ratingFilter, initialProducts])
-
-  const categories = ["All", ...new Set(initialProducts.map((p) => p.category))]
 
   return (
     <div className="container mx-auto px-4 py-8 text-text">
