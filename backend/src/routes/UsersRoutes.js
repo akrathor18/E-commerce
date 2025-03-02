@@ -43,7 +43,7 @@ router.post("/register", async (req, res) => {
     if (!userLogin) return res.status(404).json('User not found');
     const isMatch = await userLogin.comparePassword(password);
     if (!isMatch) return res.status(400).json('Invalid credentials');
-    const token = generateSessionId(newUser, res);
+    const token = generateSessionId(userLogin, res);
     res.status(201).json({ message: "User registered successfully!", token });
   
   } catch (error) {

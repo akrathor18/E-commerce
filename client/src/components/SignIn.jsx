@@ -1,11 +1,13 @@
 import { React, useState } from 'react';
 import { ArrowRight, EyeOff, Eye } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate  } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 
+import { toast } from "react-toastify";
+import API from '../config/axios';
 function SignIn() {
     {document.title="Sign-In"}
-
+    const navigate = useNavigate();
     const [showPass, setShowPass] = useState(false);
 
     const {
@@ -15,9 +17,19 @@ function SignIn() {
     } = useForm();
 
     // Dummy submit handler
-    const onSubmit = (data) => {
-        console.log("Form submitted with data:", data);
-        alert("Sign-in successful!");
+    const onSubmit = async(data) =>{
+        try {
+            const response = await API.post("/users/login", {
+                email: data.Email,
+                password:data.Password,
+              });
+              localStorage.setItem("token", response.data.token);
+              toast.success("resgister successfully!"); 
+              navigate("/");
+        
+          } catch (error) {
+        toast.error(error.response?.data);
+          }
     };
 
     return (

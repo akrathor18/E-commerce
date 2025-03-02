@@ -1,12 +1,14 @@
 import { React, useState , } from 'react';
 
 import { ArrowRight, EyeOff, Eye } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import API from '../config/axios';
  function SignUp() {
+    
+    const navigate = useNavigate();
     {document.title="Sign-Up"}
     const [showPass, setShowPass] = useState(false);
 
@@ -18,8 +20,6 @@ import API from '../config/axios';
 
     // Dummy submit handler
     const onSubmit = async(data) => {
-        console.log("Form submitted with data:", data);
-        
         try {
             const response = await API.post("/users/register", {
                 email: data.Email,
@@ -28,10 +28,9 @@ import API from '../config/axios';
                 name:data.fName ,
                 phone:data.number
               });
-              console.log(response.data)
-              console.log(response.data.token)
               localStorage.setItem("token", response.data.token);
               toast.success("resgister successfully!");
+              navigate("/");
         
           } catch (error) {
         toast.error(error.response?.data);
