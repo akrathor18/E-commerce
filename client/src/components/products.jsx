@@ -3,8 +3,6 @@ import { Star, StarHalf, Heart, Eye, ShoppingCart } from "lucide-react"
 import API from '../config/axios.js'
 import{Link} from 'react-router-dom'
 
-import { toast,ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function Products() {
   { document.title = 'UrbanMart - an E-commarce website for online shopping' }

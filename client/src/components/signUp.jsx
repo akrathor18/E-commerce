@@ -3,7 +3,9 @@ import { React, useState , } from 'react';
 import { ArrowRight, EyeOff, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
+import API from '../config/axios';
  function SignUp() {
     {document.title="Sign-Up"}
     const [showPass, setShowPass] = useState(false);
@@ -15,9 +17,25 @@ import { useForm } from "react-hook-form";
     } = useForm();
 
     // Dummy submit handler
-    const onSubmit = (data) => {
+    const onSubmit = async(data) => {
         console.log("Form submitted with data:", data);
-        alert("Form submitted successfully!");
+        
+        try {
+            const response = await API.post("/users/register", {
+                email: data.Email,
+                password:data.Password,
+                address:data.address,
+                name:data.fName ,
+                phone:data.number
+              });
+              console.log(response.data)
+              console.log(response.data.token)
+              localStorage.setItem("token", response.data.token);
+              toast.success("resgister successfully!");
+        
+          } catch (error) {
+        toast.error(error.response?.data);
+          }
     };
     return (
         <section>
