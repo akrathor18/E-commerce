@@ -51,7 +51,6 @@ router.get("/search", async (req, res) => {
 router.get('/filter', async (req, res) => {
     try {
         const { category, rating } = req.query;
-
         let filterConditions = {};
 
         // If a category is specified, add it to filter
