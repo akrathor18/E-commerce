@@ -5,6 +5,9 @@ import Loader from "./components/Loader";
 import NavBar from "./components/navBar";
 // import { BrowserRouter, Routes, Route, useLocation, Link, Outlet } from "react-router-dom";
 import ProtectedRoute from './auth/ProtectedRoute'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // Lazy-loaded components
 const SignUp = lazy(() => import("./components/SignUp"));
 const Products = lazy(() => import("./components/products"));
@@ -201,7 +204,15 @@ const router = createBrowserRouter([
 
 
   return (
-    <>
+    <> <ToastContainer 
+    position="top-right"
+    autoClose={3000}
+    hideProgressBar={false}
+    closeOnClick
+    pauseOnHover
+    draggable
+    theme="dark" 
+  />
       <RouterProvider router={router} />
     </>
   );

@@ -2,11 +2,14 @@ import { useState, useEffect } from "react"
 import { Star, StarHalf, Heart, Eye, ShoppingCart } from "lucide-react"
 import API from '../config/axios.js'
 import{Link} from 'react-router-dom'
+
+import { toast,ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Products() {
-  
   { document.title = 'UrbanMart - an E-commarce website for online shopping' }
   const [cartItems, setCartItems] = useState([])
-  
+
   
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -28,8 +31,7 @@ function Products() {
   const fetchCategories = async () => {
     try {
       const response = await API.get("/product/categories"); // Call the new route to get categories
-      setCategories(["All", ...response.data]); // Add 'All' to the categories
-      console.log(response.data)
+      setCategories(["All", ...response.data]); 
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
