@@ -1,7 +1,8 @@
 
 import { useState } from "react"
-
-
+import axios from "axios";
+import API from'../../config/axios'
+axios.defaults.withCredentials = true;
  function ShoppingCart() {
   const [products, setProducts] =useState([ {
     "id": 1,
@@ -52,6 +53,19 @@ import { useState } from "react"
     }
   },])
   {document.title='My Cart'}
+
+  async function fetchData() {
+    try {
+      const response = await API.get('/users/profile'); // No need to specify withCredentials again
+      console.log(response);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+  
+  fetchData()
+
   const subtotal = products.reduce((sum, product) => sum + product.price, 0)
 
   const handleRemove = (productId) => {

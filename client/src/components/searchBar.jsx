@@ -432,7 +432,6 @@ function searchBar() {
    const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-   
       // Extract all titles and update state
       const titles = productDetail.map((item) => item.title);
       setSuggestions(titles);

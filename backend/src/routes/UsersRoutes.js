@@ -9,14 +9,17 @@ function generateSessionId(user, res) {
   const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
+
   res.cookie("token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production", 
-    sameSite: "strict",
+    sameSite: "none", 
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
-  return token
+
+  return token;
 }
+
 router.post("/register", async (req, res) => {
   try {
     const userData = req.body
@@ -86,13 +89,21 @@ router.post("/change-password", async (req, res) => {
   }
 });
 
-router.get("/profile",authMiddleware, VerifyJwtMiddleware, async (req, res) => {
+router.get("/profile",authMiddleware ,VerifyJwtMiddleware, async (req, res) => {
   try {
     res.status(200).json(req.user);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+// router.get("/check-token", (req, res) => {
+//   console.log("Cookies received:", req.cookies);
+//   console.log("🟢 Incoming Request Cookies:", req.headers.cookie);
+//   console.log("🟢 Parsed req.cookies:", req.cookies);
+//   res.json(req.cookies);
+// });
+
 
 router.post("/cart",authMiddleware ,VerifyJwtMiddleware, async (req, res) => {
   try {

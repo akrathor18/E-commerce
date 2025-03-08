@@ -1,4 +1,4 @@
-import { React, useState , } from 'react';
+import { React, useState, } from 'react';
 
 import { ArrowRight, EyeOff, Eye } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,10 +6,10 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import API from '../config/axios';
- function SignUp() {
-    
+function SignUp() {
+
     const navigate = useNavigate();
-    {document.title="Sign-Up"}
+    { document.title = "Sign-Up" }
     const [showPass, setShowPass] = useState(false);
 
     const {
@@ -19,22 +19,22 @@ import API from '../config/axios';
     } = useForm();
 
     // Dummy submit handler
-    const onSubmit = async(data) => {
+    const onSubmit = async (data) => {
         try {
             const response = await API.post("/users/register", {
                 email: data.Email,
-                password:data.Password,
-                address:data.address,
-                name:data.fName ,
-                phone:data.number
-              });
-              localStorage.setItem("token", response.data.token);
-              toast.success("resgister successfully!");
-              navigate("/");
-        
-          } catch (error) {
-        toast.error(error.response?.data);
-          }
+                password: data.Password,
+                address: data.address,
+                name: data.fName,
+                phone: data.number
+            });
+            localStorage.setItem("token", response.data.token);
+            toast.success("resgister successfully!");
+            navigate("/");
+
+        } catch (error) {
+            toast.error(error.response?.data);
+        }
     };
     return (
         <section>
@@ -65,7 +65,7 @@ import API from '../config/axios';
                                                 maxLength: { value: 30, message: "Name must be shorter than 30 characters" },
                                             })}
                                             className={`flex h-10 w-full text-text rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 ${errors.fName ? "border-red-500 ring-red-500" : "border-gray-300 focus:ring-gray-400"
-                                            }` }
+                                                }`}
                                             type="text"
                                             placeholder="Full Name"
                                             id="name"
@@ -89,7 +89,7 @@ import API from '../config/axios';
                                                 minLength: { value: 8, message: "Invalid Email" },
                                             })}
                                             className={`flex h-10 w-full rounded-md border text-text border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 ${errors.Email ? "border-red-500 ring-red-500" : "border-gray-300 focus:ring-gray-400"
-                                            }` }
+                                                }`}
                                             type="email"
                                             placeholder="Email"
                                             id="email"
@@ -122,7 +122,7 @@ import API from '../config/axios';
                                                 e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
                                             }}
                                             className={`flex h-10 w-full rounded-md border text-text border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 ${errors.address ? "border-red-500 ring-red-500" : "border-gray-300 focus:ring-gray-400"
-                                            } `}
+                                                } `}
                                             type="tel"
                                             placeholder="Phone Number"
                                             id="number"
