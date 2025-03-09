@@ -3,6 +3,7 @@ import { Star, StarHalf, Heart, Eye, ShoppingCart } from "lucide-react"
 import API from '../config/axios.js'
 import{Link} from 'react-router-dom'
 
+import { toast } from "react-toastify";
 
 function Products() {
   { document.title = 'UrbanMart - an E-commarce website for online shopping' }
@@ -88,24 +89,18 @@ function Products() {
   }
 
 
-  const addToCart = (product) => {
-    setCartItems((prevCartItems) => {
-      // Check if the product is already in the cart
-      const isAlreadyInCart = prevCartItems.some((cartItem) => cartItem.id === product.id);
-  
-      if (isAlreadyInCart) {
-        console.log("Product is already in the cart");
-        return prevCartItems; // Return the current cart without changes
-      }
-  
-      // Add the new product to the cart
-      const updatedCart = [...prevCartItems, product];
-      console.log(updatedCart);
-       // Log the updated cart
-      alert("item added")
-      return updatedCart;
-    });
-  };
+  const addToCart = async(product) => {
+   console.log(product._id)
+   try {
+    const response =await API.post('/users/cart',{
+      productId: product._id
+    })
+    console.log(response.data.message)
+    toast.success(response.data.message); 
+   } catch (error) {
+    console.log(error)
+   }
+    };
 
 
   return (

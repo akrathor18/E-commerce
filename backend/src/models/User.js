@@ -41,19 +41,20 @@ const userSchema = new mongoose.Schema(
         ref: "Products", // 
       },
     ],
-    cart: [
-      {
-        product: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Products",
-          required: true,
-        }
-      },
-    ],
+      cart: [
+        {
+          product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Products",
+            required: true,
+          },
+         
+        },
+      ],
     orders: [
       {
         user: { 
-          userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Corrected field name
+          userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
           name: { type: String, required: true },
           email: { type: String, required: true },
           address: { type: String, required: true },

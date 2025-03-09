@@ -1,72 +1,34 @@
-
-import { useState } from "react"
+import { useState,useEffect  } from "react"
 import axios from "axios";
 import API from'../../config/axios'
 axios.defaults.withCredentials = true;
  function ShoppingCart() {
-  const [products, setProducts] =useState([ {
-    "id": 1,
-    "title": "Men's Casual T-Shirt",
-    "price": 499,
-    "description": "Comfortable and stylish T-shirt for everyday wear, made from high-quality cotton.",
-    "category": "Clothing",
-    "image": "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg",
-    "rating": {
-      "rate": 4.2,
-      "count": 120
-    }
-  },
-  {
-    "id": 2,
-    "title": "Women's Running Shoes",
-    "price": 2999,
-    "description": "Lightweight running shoes with excellent grip and cushioning for long-lasting comfort.",
-    "category": "Footwear",
-    "image": "https://cdn.pixabay.com/photo/2018/01/25/00/18/sneakers-3105120_1280.jpg",
-    "rating": {
-      "rate": 4.5,
-      "count": 200
-    }
-  },
-  {
-    "id": 3,
-    "title": "Wireless Earbuds",
-    "price": 1999,
-    "description": "True wireless earbuds with superior sound quality and long battery life.",
-    "category": "Electronics",
-    "image": "https://cdn.pixabay.com/photo/2020/06/10/13/22/headphones-5282687_1280.jpg",
-    "rating": {
-      "rate": 4.7,
-      "count": 350
-    }
-  },
-  {
-    "id": 4,
-    "title": "Ceramic Coffee Mug",
-    "price": 299,
-    "description": "Stylish ceramic mug ideal for coffee, tea, and other beverages.",
-    "category": "Kitchenware",
-    "image": "https://cdn.pixabay.com/photo/2019/01/10/20/48/mug-3926033_1280.jpg",
-    "rating": {
-      "rate": 4.3,
-      "count": 95
-    }
-  },])
-  {document.title='My Cart'}
+   {document.title='My Cart'}
+   const [products, setProducts] = useState([]);
 
-  async function fetchData() {
-    try {
-      const response = await API.get('/users/profile'); // No need to specify withCredentials again
-      console.log(response);
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-  
-  fetchData()
+   useEffect(() => {
+     console.log("Updated products:", products);
+     console.log("Type of products:", typeof products);
+   }, [products]); // Runs when `products` state updates
+   
+   async function fetchData() {
+     try {
+       const response = await API.get("/users/cart");
+       console.log("Fetched Data:", response.data.cart);
+       setProducts(response.data.cart);
+       setProducts(response.data.cart);
+     } catch (error) {
+       console.error("Error fetching data:", error);
+     }
+   }
+   
+   useEffect(() => {
+     fetchData();
+   }, []); // Runs only once when the component mounts
+   
 
-  const subtotal = products.reduce((sum, product) => sum + product.price, 0)
+  // const subtotal = products.reduce((sum, product) => sum + product.price, 0)
+  const subtotal = Array.isArray(products) ? products.reduce((sum, item) => sum + item.product.price * item.quantity, 0) : 0;
 
   const handleRemove = (productId) => {
     setProducts(products.filter((product) => product.id !== productId))

@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 import VerifyJwtMiddleware from "../Middleware/VerifyJwtMiddleware.js";
 import authMiddleware from "../Middleware/authMiddleware.js";
 import mongoose from "mongoose";
+import Product from "../models/Products.js";
 function generateSessionId(user, res) {
   const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "7d",
@@ -97,12 +98,22 @@ router.get("/profile",authMiddleware ,VerifyJwtMiddleware, async (req, res) => {
   }
 });
 
-// router.get("/check-token", (req, res) => {
-//   console.log("Cookies received:", req.cookies);
-//   console.log("🟢 Incoming Request Cookies:", req.headers.cookie);
-//   console.log("🟢 Parsed req.cookies:", req.cookies);
-//   res.json(req.cookies);
-// });
+router.get("/cart", authMiddleware, VerifyJwtMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id)
+      .populate("cart.product") // Populate product details
+      .exec();
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json({ cart: user.cart }); // Return only the cart array
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
 
 
 router.post("/cart",authMiddleware ,VerifyJwtMiddleware, async (req, res) => {
