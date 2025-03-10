@@ -139,26 +139,21 @@ router.post("/cart",authMiddleware ,VerifyJwtMiddleware, async (req, res) => {
 });
 router.delete("/cartromove/:productId",authMiddleware,VerifyJwtMiddleware, async (req, res) => {
   try {
-    const { productId } = req.params;
-    if (!productId) {
-      return res.status(400).json({ message: "Product ID is required" });
-    }
+    const userId = req.user.id; // Get user ID from auth middleware
+    const productId = req.params.id; // Get product ID from request params
 
-    // Find the user
-    const user = await User.findById(req.user.id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    user.cart = user.cart.filter(item => item.product.toString() !== productId);
-    await user.save();
+    // Find the user and update the cart
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { cart: { _id: productId } } }, // Remove item by `_id`
+      { new: true }
+    );
 
-    res.status(200).json({ message: "Product removed from cart", cart: user.cart });
+    res.json({ message: "Item removed", cart: updatedUser.cart });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error", error });
+    res.status(500).json({ error: "Failed to remove item" });
   }
 });
-
 router.post("/wishlist", authMiddleware, VerifyJwtMiddleware, async (req, res) => {
 
   try {

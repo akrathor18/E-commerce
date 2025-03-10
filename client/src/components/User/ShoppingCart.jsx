@@ -1,43 +1,50 @@
-import { useState,useEffect  } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios";
-import API from'../../config/axios'
+import API from '../../config/axios'
 axios.defaults.withCredentials = true;
- function ShoppingCart() {
-   {document.title='My Cart'}
-   const [products, setProducts] = useState([]);
+function ShoppingCart() {
+  { document.title = 'My Cart' }
+  const [products, setProducts] = useState([]);
 
-   useEffect(() => {
-     console.log("Updated products:", products);
-     console.log("Type of products:", typeof products);
-   }, [products]); // Runs when `products` state updates
-   
-   async function fetchData() {
-     try {
-       const response = await API.get("/users/cart");
-       console.log("Fetched Data:", response.data.cart);
-       setProducts(response.data.cart);
-       setProducts(response.data.cart);
-     } catch (error) {
-       console.error("Error fetching data:", error);
-     }
-   }
-   
-   useEffect(() => {
-     fetchData();
-   }, []); // Runs only once when the component mounts
-   
+  async function fetchData() {
+    try {
+      const response = await API.get("/users/cart");
+      setProducts(response.data.cart);
+
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []); // Runs only once when the component mounts
+
 
   // const subtotal = products.reduce((sum, product) => sum + product.price, 0)
-  const subtotal = Array.isArray(products) ? products.reduce((sum, item) => sum + item.product.price * item.quantity, 0) : 0;
+  const subtotal = Array.isArray(products)
+  ? products.reduce((sum, item) => sum + item.product.price * (item.quantity ?? 1), 0)
+  : 0;
 
-  const handleRemove = (productId) => {
-    setProducts(products.filter((product) => product.id !== productId))
+
+  const handleRemove = async (productId) => {
+    try {
+      const response = await API.delete(`/users/cartromove/${productId}`);
+    setProducts(products.filter((item) => item._id !== productId));
+      console.log(response)
+      console.log(products)
+      console.log(`/users/cartromove/${productId}`)
+      
+    } catch (error) {
+      console.log(productId)
+      console.error("Error fetching data:", error);
+    }
   }
+  
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 min-h-screen text-text">
       <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
-
       {products.length === 0 ? (
         <div className="text-center py-16">
           <p className="text-2xl font-semibold text-text">Your cart is empty</p>
@@ -46,42 +53,45 @@ axios.defaults.withCredentials = true;
       ) : (
         <>
           <div className="space-y-8 py-4">
-            {products.map((product) => (
-              <div key={product.id} className="flex items-start py-6 border-t">
-                <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-md">
-                  <img
-                    src={product.image || "/placeholder.svg"}
-                    alt={product.name}
-                    width={128}
-                    height={128}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-
-                <div className="ml-6 flex-1 flex flex-col">
-                  <div className="flex justify-between">
-                    <div>
-                      <h3 className="text-base font-medium text-text">{product.title}</h3>
-                      <p className="mt-1 text-sm text-text">{product.rating.rate}</p>
-                    </div>
-                    <p className="text-base font-medium text-text">₹{product.price.toFixed(2)}</p>
+            {products.map((item) => {
+              const product = item.product;
+              return (
+                <div key={product.id} className="flex items-start py-6 border-t">
+                  <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-md">
+                    <img
+                      src={product.image || "/placeholder.svg"}
+                      alt={product.title}
+                      width={128}
+                      height={128}
+                      className="h-full w-full object-cover object-center"
+                    />
                   </div>
 
-                  <div className="flex items-center justify-between mt-4">
+                  <div className="ml-6 flex-1 flex flex-col">
+                    <div className="flex justify-between">
+                      <div>
+                        <h3 className="text-base font-medium text-text">{product.title}</h3>
+                        <p className="mt-1 text-sm text-text">{product.rating?.rate ?? "No rating"}</p>
+                      </div>
+                      <p className="text-base font-medium text-text">₹{product.price.toFixed(2)}</p>
+                    </div>
+
+                    <div className="flex items-center justify-between mt-4">
                       <p className="text-sm text-green-500 flex items-center">
                         <span className="mr-1.5">✓</span> In stock
                       </p>
-                    
-                    <button
-                      onClick={() => handleRemove(product.id)}
-                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      Remove
-                    </button>
+
+                      <button
+                        onClick={() => handleRemove(product._id)}
+                        className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="border-t border-gray-200 mt-6 pt-6">
