@@ -34,6 +34,7 @@ function ShoppingCart() {
       console.log(response)
       console.log(products)
       console.log(`/users/cartromove/${productId}`)
+      fetchData();
       
     } catch (error) {
       console.log(productId)
