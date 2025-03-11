@@ -30,14 +30,9 @@ function ShoppingCart() {
   const handleRemove = async (productId) => {
     try {
       const response = await API.delete(`/users/cartromove/${productId}`);
-    setProducts(products.filter((item) => item._id !== productId));
-      console.log(response)
-      console.log(products)
-      console.log(`/users/cartromove/${productId}`)
       fetchData();
       
     } catch (error) {
-      console.log(productId)
       console.error("Error fetching data:", error);
     }
   }

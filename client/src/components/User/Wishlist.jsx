@@ -1,28 +1,23 @@
 import { Heart, Trash2, ShoppingCart } from "lucide-react"
 import { useState } from "react"
-
+import API from '../../config/axios'
 const Wishlist = () => {
   {document.title='My WishList'}
-  const [products, setProducts] = useState([
-    {
-    "id": 5,
-    "title": "Adjustable Dumbbells",
-    "price": 2499,
-    "description": "Pair of adjustable dumbbells for strength training and fitness enthusiasts.",
-    "detailedDescription": "These adjustable dumbbells allow you to increase or decrease weight for various strength training exercises. Ideal for home workouts, they offer versatility and convenience.",
-    "category": "Fitness",
-    "image": "https://cdn.pixabay.com/photo/2020/04/07/16/05/body-building-5013985_1280.jpg",
-    "rating": {
-      "rate": 1.6,
-      "count": 180
-    },
-    "stock": 75
-  },
-])
-
+  const [products, setProducts] = useState([])
+async function fetchData() {
+  try {
+    const response = await API.get("/users/wishlist");
+    setProducts(response.data);
+    console.log(response.data)
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
   const handleRemoveProduct = (productId) => {
     setProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId))
   }
+
+  fetchData()
 
   if (products.length === 0) {
     return (
@@ -49,7 +44,7 @@ const Wishlist = () => {
               />
               <div className="flex-grow">
                 <h3 className="text-xl font-semibold text-gray-100">{product.title}</h3>
-                <p className="text-lg font-bold text-green-400">${product.price.toFixed(2)}</p>
+                <p className="text-lg font-bold text-green-400">${"product.price.toFixed(2)"}</p>
               </div>
               <div className="flex space-x-2">
                 <button

@@ -114,8 +114,6 @@ router.get("/cart", authMiddleware, VerifyJwtMiddleware, async (req, res) => {
 });
 
 
-
-
 router.post("/cart",authMiddleware ,VerifyJwtMiddleware, async (req, res) => {
   try {
     const { productId } = req.body; 
@@ -158,8 +156,23 @@ router.delete("/cartromove/:productId",authMiddleware,VerifyJwtMiddleware, async
     res.status(500).json({ message: "Internal server error", error });
   }
 });
-router.post("/wishlist", authMiddleware, VerifyJwtMiddleware, async (req, res) => {
 
+router.get("/wishlist", authMiddleware, VerifyJwtMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id)
+      .populate("wishlist.product") // Populate product details
+      .exec();
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json(user.wishlist); // Return only the cart array
+    // res.status(200).json({ user}); // Return only the cart array
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+router.post("/wishlist", authMiddleware, VerifyJwtMiddleware, async (req, res) => {
   try {
     const { productId } = req.body;
 
@@ -176,14 +189,15 @@ router.post("/wishlist", authMiddleware, VerifyJwtMiddleware, async (req, res) =
       return res.status(404).json({ message: "User not found" });
     }
 
-    const productObjectId = new mongoose.Types.ObjectId(productId); 
+    const productObjectId = new mongoose.Types.ObjectId(productId);
 
     // Prevent duplicate wishlist entries
-    if (user.wishlist.includes(productObjectId)) {
+    if (user.wishlist.some((item) => item.product.equals(productObjectId))) {
       return res.status(400).json({ message: "Product already in wishlist" });
     }
 
-    user.wishlist.push(productObjectId); 
+    // Push as an object { product: productObjectId }
+    user.wishlist.push({ product: productObjectId });
     await user.save();
 
     res.status(200).json({ message: "Product added to wishlist", wishlist: user.wishlist });
@@ -192,6 +206,7 @@ router.post("/wishlist", authMiddleware, VerifyJwtMiddleware, async (req, res) =
     res.status(500).json({ message: "Internal server error", error });
   }
 });
+
 
 router.delete("/wishlistromove/:productId",authMiddleware,VerifyJwtMiddleware, async (req, res) => {
   try {
