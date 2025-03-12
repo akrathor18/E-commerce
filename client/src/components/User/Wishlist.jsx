@@ -1,5 +1,5 @@
 import { Heart, Trash2, ShoppingCart } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import API from '../../config/axios'
 const Wishlist = () => {
   {document.title='My WishList'}
@@ -16,8 +16,10 @@ async function fetchData() {
   const handleRemoveProduct = (productId) => {
     setProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId))
   }
-
+useEffect(() => {
   fetchData()
+  }, [])
+
 
   if (products.length === 0) {
     return (
@@ -35,16 +37,16 @@ async function fetchData() {
       </h2>
       <ul className="space-y-4">
         {products.map((product) => (
-          <li key={product.id} className="bg-secondary rounded-lg shadow-md overflow-hidden">
+          <li key={product._id} className="bg-secondary rounded-lg shadow-md overflow-hidden">
             <div className="flex items-center p-4">
               <img
-                src={product.image || "/placeholder.svg"}
-                alt={product.name}
+                src={product.product.image || "/placeholder.svg"}
+                alt={product.product.name}
                 className="w-24 h-24 object-cover rounded-md mr-4"
               />
               <div className="flex-grow">
-                <h3 className="text-xl font-semibold text-gray-100">{product.title}</h3>
-                <p className="text-lg font-bold text-green-400">${"product.price.toFixed(2)"}</p>
+                <h3 className="text-xl font-semibold text-gray-100">{product.product.title}</h3>
+                <p className="text-lg font-bold text-green-400">${product.product.price.toFixed(2)}</p>
               </div>
               <div className="flex space-x-2">
                 <button
