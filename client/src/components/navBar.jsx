@@ -4,7 +4,7 @@ import logo from '../assets/logo.png'
 import { useState, memo,useEffect  } from 'react'
 import SearchBar from './searchBar'
 import { Link,useNavigate } from 'react-router-dom'
-import { UserPen , Heart, LogIn, LogOut   } from 'lucide-react';
+import { UserPen , Heart,ShoppingCart, LogIn, LogOut   } from 'lucide-react';
 
 import { toast } from "react-toastify";
  function NavBar() {
@@ -97,6 +97,14 @@ import { toast } from "react-toastify";
                 className="flex gap-2 px-4 py-2 text-sm data-[focus]:bg-primary hover:text-hover data-[focus]:outline-none"
               >
                 <UserPen className="w-5" /> Your Profile
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link
+                to={"/mycart"}
+                className="flex gap-2 px-4 py-2 text-sm data-[focus]:bg-primary hover:text-hover data-[focus]:outline-none"
+              >
+                <ShoppingCart fill="none" className="w-5" /> Cart
               </Link>
             </MenuItem>
             <MenuItem>

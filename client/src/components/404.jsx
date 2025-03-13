@@ -68,7 +68,7 @@ function NotFound() {{
           className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-lg group"
         >
          <Rocket className="w-8 h-8" style={{ transform: `rotate(${rotation}deg)` }} />
-          <span>Return to Earth</span>
+          <span>Return to Home</span>
         </Link>
       </div>
     </div>
