@@ -208,22 +208,27 @@ router.post("/wishlist", authMiddleware, VerifyJwtMiddleware, async (req, res) =
 });
 
 
-router.delete("/wishlistromove/:productId",authMiddleware,VerifyJwtMiddleware, async (req, res) => {
+router.delete("/wishlistremove/:productId", authMiddleware, VerifyJwtMiddleware, async (req, res) => {
   try {
     const { productId } = req.params;
     if (!productId) {
       return res.status(400).json({ message: "Product ID is required" });
     }
 
+    // Convert productId to ObjectId (if necessary)
+    const objectId = new mongoose.Types.ObjectId(productId);
+
+  
     // Find the user
     const user = await User.findById(req.user.id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    user.wishlist = user.wishlist.filter(item => item.toString() !== productId);
+    user.wishlist = user.wishlist.filter(
+      (item) => item.product.toString() !== objectId.toString()
+    );
     await user.save();
-
-    res.status(200).json({ message: "Product removed from wishlist", cart: user.wishlist });
+    res.status(200).json({ message: "Product removed from wishlist", wishlist: user.wishlist });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error", error });

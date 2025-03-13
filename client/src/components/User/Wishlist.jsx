@@ -1,25 +1,45 @@
 import { Heart, Trash2, ShoppingCart } from "lucide-react"
 import { useState, useEffect } from "react"
 import API from '../../config/axios'
+
+import { toast } from "react-toastify";
 const Wishlist = () => {
-  {document.title='My WishList'}
+  { document.title = 'My WishList' }
   const [products, setProducts] = useState([])
-async function fetchData() {
-  try {
-    const response = await API.get("/users/wishlist");
-    setProducts(response.data);
-    console.log(response.data)
-  } catch (error) {
-    console.error("Error fetching data:", error);
+  async function fetchData() {
+    try {
+      const response = await API.get("/users/wishlist");
+      setProducts(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }
-}
-  const handleRemoveProduct = (productId) => {
-    setProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId))
+  const handleRemoveProduct = async (productId) => {
+    try {
+      const response = await API.delete(`/users/wishlistremove/${productId}`)
+      fetchData()
+      toast.success(response.data.message);
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response.data.message);
+    }
   }
-useEffect(() => {
-  fetchData()
+  useEffect(() => {
+    fetchData()
   }, [])
 
+  const addToCart = async (productId) => {
+    try {
+      const response = await API.post('/users/cart', {
+        productId: productId
+      })
+      toast.success(response.data.message);
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data.message);
+    }
+  };
 
   if (products.length === 0) {
     return (
@@ -37,7 +57,7 @@ useEffect(() => {
       </h2>
       <ul className="space-y-4">
         {products.map((product) => (
-          <li key={product._id} className="bg-secondary rounded-lg shadow-md overflow-hidden">
+          <li key={product.product._id} className="bg-secondary rounded-lg shadow-md overflow-hidden">
             <div className="flex items-center p-4">
               <img
                 src={product.product.image || "/placeholder.svg"}
@@ -50,13 +70,14 @@ useEffect(() => {
               </div>
               <div className="flex space-x-2">
                 <button
-                  onClick={() => handleRemoveProduct(product.id)}
+                  onClick={() => handleRemoveProduct(product.product._id)}
                   className="p-2 text-red-500 hover:bg-red-900 rounded-full transition-colors duration-200"
                   aria-label="Remove from wishlist"
                 >
                   <Trash2 className="w-6 h-6" />
                 </button>
                 <button
+                  onClick={() => addToCart(product.product._id)}
                   className="p-2 text-green-500 hover:bg-green-900 rounded-full transition-colors duration-200"
                   aria-label="Add to cart"
                 >

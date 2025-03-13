@@ -82,11 +82,6 @@ function Products() {
     </div>
     )
   }
-
-  const toggleFavorite = (productId) => {
-    setFavorites((prev) => (prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]))
-    console.log(favorites)
-  }
   const getFavorite = async () => {
     try {
       const response = await API.get("/users/wishlist");
@@ -101,6 +96,19 @@ function Products() {
       console.error("Error fetching data:", error);
     }
   };
+  const toggleFavorite = async (productId) => {
+    try {
+      const response = await API.post('/users/wishlist',{
+        productId: productId
+      })
+      getFavorite()
+      toast.success(response.data.message);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+       toast.error(error.response.data.message);
+    }
+  }
+ 
   
   useEffect(() => {
     getFavorite();
@@ -161,7 +169,7 @@ function Products() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           
-          <div key={product._id} className="border rounded-lg text-text bg-secondary shadow-md flex flex-col">
+          <div key={product.id} className="border rounded-lg text-text bg-secondary shadow-md flex flex-col">
             <div className="relative">
               <img
                 src={product.image || `/placeholder.svg?height=200&width=200`}
@@ -170,7 +178,7 @@ function Products() {
               />
               <button
                 className="absolute top-2 right-2 p-1 bg-white rounded-full"
-                onClick={() => toggleFavorite(product.id)}
+                onClick={() => toggleFavorite(product._id)}
               >
                 <Heart className={favorites.includes(product._id) ? "fill-red-500 text-red-500" : "text-gray-500"} />
               </button>
