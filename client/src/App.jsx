@@ -68,13 +68,12 @@ const router = createBrowserRouter([
   // Protect user profile & cart routes
   {
     path: "/profile",
-    element: <ProtectedRoute />, // 👈 Wrap with ProtectedRoute
+    element: <ProtectedRoute />,
     children: [
       {
         path: "",
         element: (
           <>
-            <NavBar />
             <Suspense fallback={<Loader />}>
               <UserProfile />
             </Suspense>
@@ -85,7 +84,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/Mycart",
-    element: <ProtectedRoute />, // 👈 Wrap with ProtectedRoute
+    element: <ProtectedRoute />,
     children: [
       {
         path: "",
@@ -102,7 +101,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/wishlist",
-    element: <ProtectedRoute />, // 👈 Wrap with ProtectedRoute
+    element: <ProtectedRoute />,
     children: [
       {
         path: "",
@@ -119,7 +118,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/checkout",
-    element: <ProtectedRoute />, // 👈 Wrap with ProtectedRoute
+    element: <ProtectedRoute />, 
     children: [
       {
         path: "",
@@ -136,7 +135,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/orderconfirmation",
-    element: <ProtectedRoute />, // 👈 Wrap with ProtectedRoute
+    element: <ProtectedRoute />,
     children: [
       {
         path: "",
@@ -164,7 +163,7 @@ const router = createBrowserRouter([
       <>
        <AdminPanel/>
       </>
-    ), // 👈 Wrap with ProtectedRoute
+    ),
     children: [
       {
         path: "addproduct",
