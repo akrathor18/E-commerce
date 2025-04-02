@@ -44,7 +44,6 @@ cd ecommerce-project
 ```bash 
 cd backend
 npm install
-cp .env.example .env  # Add your environment variables
 npm run dev
 ```
 #### Frontend Setup
